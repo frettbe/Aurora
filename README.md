@@ -14,7 +14,7 @@ Application moderne de gestion de fonds de bibliothèque personnelle ou associat
 
 ### 📚 Gestion complète
 - **Livres** : CRUD complet, métadonnées enrichies (ISBN, éditeur, année, etc.)
-- **Membres** : Gestion des emprunteurs avec statuts et quotas personnalisés
+- **Membres** : Gestion des emprunteurs avec date de retour de prêt personnalisable
 - **Emprunts** : Système de prêts avec dates d'échéance et gestion des retours
 
 ### 🔄 Import/Export
