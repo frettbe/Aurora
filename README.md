@@ -48,7 +48,7 @@ Application moderne de gestion de fonds de bibliothèque personnelle ou associat
 pip install -r requirements.txt
 
 ### Lancement
-python -m libapp.app
+python run.py
 
 --
 
@@ -105,13 +105,29 @@ libapp/
 
 ---
 
+## 🤝 Contribuer
+
+Les contributions sont les bienvenues ! Pour contribuer :
+
+1. Fork le projet
+2. Crée une branche pour ta fonctionnalité (`git checkout -b feature/AmazingFeature`)
+3. Commit tes changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvre une Pull Request
+
+**Guidelines** :
+- Respect des standards Ruff
+- Docstrings complètes pour toutes les fonctions
+- Tests unitaires pour les nouvelles fonctionnalités
+
+
+
 ## 📜 Licence
 
 Ce projet est distribué sous licence **GNU General Public License v3.0**.
 
 Voir le fichier [LICENSE](LICENSE) pour plus de détails.
 
-**Code source disponible sur demande** : contact@6f4.be
 
 ---
 
@@ -121,7 +137,7 @@ Développé par **6f4**
 
 - 🌐 Site web : [www.6f4.be](https://www.6f4.be)
 - 📧 Contact : contact@6f4.be
-- 🐙 GitHub : [github.com/frettbe/Aurora](https://github.com/frettbe/Aurora) (repo privé)
+- 🐙 GitHub : [github.com/frettbe/Aurora](https://github.com/frettbe/Aurora)
 
 ---
 
