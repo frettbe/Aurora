@@ -1,0 +1,21 @@
+image: python:3.11
+
+stages:
+  - lint
+  - test
+
+before_script:
+  - pip install -r requirements.txt
+
+lint:
+  stage: lint
+  script:
+    - ruff check .
+    - isort --check-only .
+    - black --check .
+
+test:
+  stage: test
+  script:
+    - export PYTHONPATH=.
+    - pytest -q

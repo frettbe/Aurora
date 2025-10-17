@@ -1,0 +1,359 @@
+# lang/en.yaml
+
+menu:
+  file: "File"
+  file_new_book: "New book…"
+  file_import: "Import…"
+  file_quit: "Quit"
+  file_new_member: "New member..."
+  file_new_loan: "New loan..."
+  
+  view: "View"
+  view_dashboard: "Dashboard"
+  view_books: "Books"
+  view_members: "Members"
+  view_loans: "Loans"
+  view_split: "Split view"
+  
+  edit: "Edit"
+  edit_delete_item: "Delete..."
+  edit_return: "Return from loan..."
+  
+  help: "Help"
+  about: "About…"
+
+dashboard:
+  view_title: "Dashboard"
+  detach_tooltip: "Detach dashboard into a separate window"
+  new_book_button: "New Book"
+  new_member_button: "New Member"
+  new_loan_button: "New Loan"
+
+kpi:
+  books_label: "Books (records)"
+  copies_total_label: "Copies (total)"
+  copies_available_label: "Copies (available)"
+  availability_label: "Availability (%)"
+  members_label: "Members"
+  open_loans_label: "Open loans"
+  overdues_label: "Overdue"
+
+loan_dialogs:
+  new_loan_title: "New loan"
+  due_date_field_label: "Due date"
+  return_loan_title: "Return a loan"
+
+loan_list:
+  filter:
+    label: "Filter:"
+    search_placeholder: "Search (title, member...)"
+  refresh_button: "Refresh"
+  table:
+    col_id: "ID"
+    col_book: "Book"
+    col_member: "Member"
+    col_loan_date: "Loan date"
+    col_due_date: "Due date"
+    col_return_date: "Returned"
+    col_overdue: "Overdue"
+  status_overdue: "Overdue"
+  status:
+    all: "All"
+    open: "Open"
+    returned: "Returned"
+  context_menu:
+    return_action: "Mark as returned"
+  context_return_book: "Return book"
+  status_label: "Status:"
+  all_status: "All"
+  overdue_only_checkbox: "Overdue only"
+  search_label: "Search:"
+  return_error_title: "Error"
+  return_error_message: "Unable to return this book"
+  return_success_title: "Loan return"
+  return_success_message: "The book has been returned"
+
+action:
+  import_members: "Import members"
+
+errors:
+  action_impossible: "Action impossible"
+  no_copies_available: "No copies of this book are available."
+  missing_data: "Missing data"
+  member_not_selected: "Please select a member."
+  unexpected_error: "Error"
+  unexpected_error_message: "An unexpected error occurred: {error}"
+  error_title: "Error"
+  delete_book_title: "Error"
+  delete_member_title: "Error"
+  delete_book_body: "Error deleting the book"
+  delete_member_body: "Error deleting the member"
+  book_not_selected: "Please select a book."
+
+preferences:
+  title: "Preferences"
+  language: "Application language"
+  theme: "Theme"
+  startup_view: "Startup view"
+  language_changed_title: "Language change"
+  language_changed_body: "The language will be updated the next time you start the application."
+  saved_body: "Preferences saved. The language will be applied at the next startup."
+  remember_geometry_label: "Remember window position"
+  show_overdue_alert: "Show alert at startup if there are overdue loans"
+  section_appearance: "🎨 Appearance"
+  section_interface: "🖥️ Interface"
+  section_columns: "📊 Visible columns"
+  section_alerts: "🔔 Alerts & Notifications"
+  days: "days"
+  books: "books"
+  section_loans: "📚 Loans"
+  default_loan_days: "Default loan duration"
+
+buttons:
+  save: "Save"
+  cancel: "Cancel"
+  choose: "Choose"
+  bnf_complete: "Complete via BnF"
+  validate_loan: "Borrow this book"
+
+member_editor:
+  edit_title: "Edit member"
+  new_title: "New member"
+  error_first_name_required: "Error: first name is required!"
+  error_last_name_required: "Error: last name is required!"
+  error_title: "Error"
+  error_save: "Unable to save: "
+
+messages:
+  validation_title: "Validation"
+  validation_missing_title: "The title is mandatory."
+  validation_invalid_copies_count: "The number of available copies cannot exceed the total."
+  success: "Success"
+  loan_success: "The book '{book_title}' has been successfully loaned."
+  loan_created_successfully: "Loan created successfully!"
+
+tooltip:
+  refresh: "Refresh current view (F5)"
+
+window:
+  title: "Aurora AE – Library Management - V 1.0)"
+
+bnf_select:
+  title: "Select a BnF record"
+  multiple_results: "Multiple results found:"
+  unknown_title: "Unknown title"
+  unknown_author: "Unknown author"
+
+book_editor:
+  window_edit: "Edit book"
+  window_new: "New book"
+  label_author: "Author:"
+  author: "Author:"
+  label_category: "Category:"
+  label_code: "Code:"
+  label_copies_available: "Available copies:"
+  label_copies_total: "Total copies:"
+  label_fund: "Fund:"
+  label_isbn: "ISBN:"
+  label_publisher: "Publisher:"
+  label_title: "Title:"
+  label_volume: "Volume:"
+  label_year: "Publication year:"
+  category: "Category:"
+  code: "Code:"
+  copies_available: "Available copies:"
+  copies_total: "Total copies:"
+  fund: "Fund:"
+  isbn: "ISBN:"
+  publisher: "Publisher:"
+  title: "Title:"
+  volume: "Volume:"
+  year: "Publication year:"
+
+bnf_search:
+  title: "BnF search"
+  no_results: "No results found."
+  error_title: "BnF error"
+  error_message: "An error occurred while communicating with the BnF service: {error}"
+
+book_list:
+  search_label: "Search:"
+  borrow_success_title: "Loan"
+  borrow_success_message: "Book loaned successfully!"
+  return_success_title: "Return"
+  return_success_message: "Book returned successfully!"
+  search_bnf_title: "BnF search"
+  search_isbn: "Searching ISBN {isbn}..."
+  search_title_author: "Searching title/author..."
+  search_completed: "Search completed!"
+  error_title: "Error"
+  search_error: "Error during search: {error}"
+  borrow_impossible: "Loan impossible"
+  borrow_not_av: "This book is not available"
+  delete_confirm: "Do you want to delete this book?"
+  delete_success_title: "Book deleted"
+  delete_success_body: "The book has been successfully deleted"
+  delete_title: "Deletion"
+  no_open_loan_message: "Loan error"
+  no_open_loan_title: "No loan is open for this book"
+
+column:
+  id: "ID"
+  code: "Code"
+  title: "Title"
+  volume: "Volume"
+  author: "Author"
+  year: "Year"
+  isbn: "ISBN"
+  publisher: "Publisher"
+  fund: "Fund"
+  available: "Available"
+
+checkout:
+  title: "Borrow: {book_title}"
+  label_member: "Member:"
+  label_due_date: "Due by:"
+
+import_dialog:
+  title: "Book import"
+  no_file_label: "(no file)"
+  browse_button: "Choose a file…"
+  options_label: "Import options"
+  policy_label: "Update policy:"
+  policy_merge: "Merge"
+  policy_skip: "Skip"
+  policy_replace: "Replace"
+  enrichment_label: "Automatic enrichment"
+  chk_bnf_fallback: "Use title + author if ISBN is empty (less reliable)"
+  chk_openlibrary: "Use OpenLibrary if BnF finds nothing"
+  report_table_headers:
+    line: "Line"
+    field: "Field"
+    severity: "Severity"
+    message: "Message"
+  export_report_button: "Export report…"
+  import_button: "Import"
+  file_dialog_title: "Choose a file"
+  progress:
+    reading: "Reading…"
+    validation: "Validation…"
+    saving: "Saving…"
+  import_done_title: "Import complete"
+  import_done_message: "records processed."
+  error_read_headers_title: "Reading"
+  error_read_headers_message: "Unable to read headers:\n{error}"
+  error_no_file_title: "Import"
+  error_no_file_message: "Choose a file first."
+  error_no_mapping_title: "Import"
+  error_no_mapping_message: "No mapping defined."
+
+loan_dialog:
+  title: "New loan"
+  label_book: "Book:"
+  label_member: "Member:"
+
+statusbar:
+  ready: "Ready!"
+
+map_columns_dialog:
+  title: "Column mapping"
+  info_label: "Associate each database field (on the left) with the corresponding column name from your file (on the right)."
+  tip_label: "Tip: Leave on '(ignore)' if the column doesn't exist in your file."
+  ignore_option: "(ignore)"
+
+member:
+  member_no: "Member No:"
+  first_name: "First name:"
+  last_name: "Last name:"
+  email: "Email:"
+  phone: "Phone:"
+  status: "Status:"
+  is_active_label: "Active:"
+  is_nonactive_status: "Inactive"
+  is_active_status: "Active"
+  status_apprenti: "Apprentice"
+  status_compagnon: "Journeyman"
+  status_maitre: "Master"
+  is_active: "The member is active"
+
+member_list:
+  search_label: "Search:"
+  loan_history: "Loan history"
+  delete_title: "Delete member"
+  delete_confirm: "Do you want to delete the member: "
+  delete_success_title: "Deleted"
+  delete_success_body: "The member has been deleted!"
+
+context:
+  edit: "Edit"
+  delete: "Delete"
+  borrow: "Borrow"
+  return: "Return from loan"
+  open_bnf: "Complete BnF"
+  new_book: "New book"
+  history: "Loan history"
+  new_member: "New member"
+  export: "Export list..."
+
+export:
+  dialog:
+    title: "Export configuration"
+    format_section: "File format"
+    columns_section: "Columns to export"
+    columns_info: "Select the columns to include in the export:"
+    column_mandatory: "This column is mandatory"
+    metadata_section: "Metadata"
+    meta_date: "Include export date"
+    meta_count: "Include record count"
+    meta_custom: "Include custom message"
+    meta_custom_placeholder: "Your custom message..."
+  save_title: "Save export"
+  sheet_name:
+    books: "Books"
+    members: "Members"
+    loans: "Loans"
+  success_title: "Export successful"
+  success_message: "{count} book(s) exported to:\n{path}"
+  error_title: "Export error"
+  error_message: "Unable to export data:\n{error}"
+  metadata:
+    date: "Exported on"
+    count: "Number of records"
+  progress:
+    message: "Export in progress..."
+  cancel: "Cancel"
+  not_available_title: "Export not available"
+  not_available_body: "Export is not available for this view."
+  not_available_loans: "Loan export will be available soon."
+  split_choice_title: "Choose view to export"
+  split_choice_body: "Do you want to export Books (Yes) or Members (No)?"
+  split_button_books: "Books"
+  split_button_members: "Members"
+  split_button_cancel: "Cancel"
+
+about:
+  description_title: "Description"
+  description_text: "Like the dawn dispels darkness, Aurora preserves and shares the light of knowledge. Modern library collection management application, designed in the spirit of the great humanist libraries."
+  author_title: "Development"
+  author_label: "Author"
+  license_title: "License"
+  license_text: "This software is distributed under {license} license."
+  website_label: "Website"
+  email_label: "Contact"
+  source_request: "Source code available upon request at contact@6f4.be"
+  title: "About"
+  body: "Aurora is a library management application."
+
+overdue_alert:
+  title: "⚠️ Overdue loans"
+  message_singular: "There is 1 overdue book."
+  message_plural: "There are {count} overdue books."
+  view_button: "View overdue"
+  close_button: "Close"
+
+import_members_dialog:
+  title: "Import members"
+  file_dialog_title: "Select a member file"
+  policy_label: "If member already exists:"
+  policy_skip: "Skip"
+  policy_update: "Update"

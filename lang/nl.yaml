@@ -1,0 +1,359 @@
+# lang/nl.yaml
+
+menu:
+  file: "Bestand"
+  file_new_book: "Nieuw boek…"
+  file_import: "Importeren…"
+  file_quit: "Afsluiten"
+  file_new_member: "Nieuw lid..."
+  file_new_loan: "Nieuwe lening..."
+  
+  view: "Weergave"
+  view_dashboard: "Dashboard"
+  view_books: "Boeken"
+  view_members: "Leden"
+  view_loans: "Leningen"
+  view_split: "Gesplitste weergave"
+  
+  edit: "Bewerken"
+  edit_delete_item: "Verwijderen..."
+  edit_return: "Lening terugbrengen..."
+  
+  help: "Help"
+  about: "Over…"
+
+dashboard:
+  view_title: "Dashboard"
+  detach_tooltip: "Dashboard loskoppelen in een apart venster"
+  new_book_button: "Nieuw boek"
+  new_member_button: "Nieuw lid"
+  new_loan_button: "Nieuwe lening"
+
+kpi:
+  books_label: "Boeken (records)"
+  copies_total_label: "Exemplaren (totaal)"
+  copies_available_label: "Exemplaren (beschikbaar)"
+  availability_label: "Beschikbaarheid (%)"
+  members_label: "Leden"
+  open_loans_label: "Open leningen"
+  overdues_label: "Te laat"
+
+loan_dialogs:
+  new_loan_title: "Nieuwe lening"
+  due_date_field_label: "Vervaldatum"
+  return_loan_title: "Een lening terugbrengen"
+
+loan_list:
+  filter:
+    label: "Filter:"
+    search_placeholder: "Zoek (titel, lid...)"
+  refresh_button: "Vernieuwen"
+  table:
+    col_id: "ID"
+    col_book: "Boek"
+    col_member: "Lid"
+    col_loan_date: "Leningdatum"
+    col_due_date: "Vervaldatum"
+    col_return_date: "Teruggebracht"
+    col_overdue: "Te laat"
+  status_overdue: "Te laat"
+  status:
+    all: "Alles"
+    open: "Open"
+    returned: "Teruggebracht"
+  context_menu:
+    return_action: "Markeer als teruggebracht"
+  context_return_book: "Boek terugbrengen"
+  status_label: "Status:"
+  all_status: "Alles"
+  overdue_only_checkbox: "Alleen te laat"
+  search_label: "Zoeken:"
+  return_error_title: "Fout"
+  return_error_message: "Kan dit boek niet terugbrengen"
+  return_success_title: "Lening teruggebracht"
+  return_success_message: "Het boek is teruggebracht"
+
+action:
+  import_members: "Leden importeren"
+
+errors:
+  action_impossible: "Actie onmogelijk"
+  no_copies_available: "Geen exemplaren van dit boek beschikbaar."
+  missing_data: "Ontbrekende gegevens"
+  member_not_selected: "Selecteer een lid."
+  unexpected_error: "Fout"
+  unexpected_error_message: "Een onverwachte fout is opgetreden: {error}"
+  error_title: "Fout"
+  delete_book_title: "Fout"
+  delete_member_title: "Fout"
+  delete_book_body: "Fout bij het verwijderen van het boek"
+  delete_member_body: "Fout bij het verwijderen van het lid"
+  book_not_selected: "Selecteer een boek."
+
+preferences:
+  title: "Voorkeuren"
+  language: "Toepassingstaal"
+  theme: "Thema"
+  startup_view: "Opstartweergave"
+  language_changed_title: "Taalwijziging"
+  language_changed_body: "De taal wordt bijgewerkt bij de volgende start van de applicatie."
+  saved_body: "Voorkeuren opgeslagen. De taal wordt toegepast bij de volgende opstart."
+  remember_geometry_label: "Vensterpositie onthouden"
+  show_overdue_alert: "Waarschuwing tonen bij opstart als er te late leningen zijn"
+  section_appearance: "🎨 Uiterlijk"
+  section_interface: "🖥️ Interface"
+  section_columns: "📊 Zichtbare kolommen"
+  section_alerts: "🔔 Waarschuwingen & Meldingen"
+  days: "dagen"
+  books: "boeken"
+  section_loans: "📚 Leningen"
+  default_loan_days: "Standaard leningduur"
+
+buttons:
+  save: "Opslaan"
+  cancel: "Annuleren"
+  choose: "Kiezen"
+  bnf_complete: "Aanvullen via BnF"
+  validate_loan: "Dit boek lenen"
+
+member_editor:
+  edit_title: "Lid bewerken"
+  new_title: "Nieuw lid"
+  error_first_name_required: "Fout: voornaam is verplicht!"
+  error_last_name_required: "Fout: achternaam is verplicht!"
+  error_title: "Fout"
+  error_save: "Kan niet opslaan: "
+
+messages:
+  validation_title: "Validatie"
+  validation_missing_title: "De titel is verplicht."
+  validation_invalid_copies_count: "Het aantal beschikbare exemplaren kan niet groter zijn dan het totaal."
+  success: "Succes"
+  loan_success: "Het boek '{book_title}' is succesvol uitgeleend."
+  loan_created_successfully: "Lening succesvol aangemaakt!"
+
+tooltip:
+  refresh: "Huidige weergave vernieuwen (F5)"
+
+window:
+  title: "Aurora AE – Bibliotheekbeheer - V 1.0)"
+
+bnf_select:
+  title: "Selecteer een BnF-record"
+  multiple_results: "Meerdere resultaten gevonden:"
+  unknown_title: "Onbekende titel"
+  unknown_author: "Onbekende auteur"
+
+book_editor:
+  window_edit: "Boek bewerken"
+  window_new: "Nieuw boek"
+  label_author: "Auteur:"
+  author: "Auteur:"
+  label_category: "Categorie:"
+  label_code: "Code:"
+  label_copies_available: "Beschikbare exemplaren:"
+  label_copies_total: "Totaal exemplaren:"
+  label_fund: "Fonds:"
+  label_isbn: "ISBN:"
+  label_publisher: "Uitgever:"
+  label_title: "Titel:"
+  label_volume: "Deel:"
+  label_year: "Publicatiejaar:"
+  category: "Categorie:"
+  code: "Code:"
+  copies_available: "Beschikbare exemplaren:"
+  copies_total: "Totaal exemplaren:"
+  fund: "Fonds:"
+  isbn: "ISBN:"
+  publisher: "Uitgever:"
+  title: "Titel:"
+  volume: "Deel:"
+  year: "Publicatiejaar:"
+
+bnf_search:
+  title: "BnF-zoeken"
+  no_results: "Geen resultaten gevonden."
+  error_title: "BnF-fout"
+  error_message: "Een fout is opgetreden bij communicatie met de BnF-service: {error}"
+
+book_list:
+  search_label: "Zoeken:"
+  borrow_success_title: "Lening"
+  borrow_success_message: "Boek succesvol uitgeleend!"
+  return_success_title: "Retour"
+  return_success_message: "Boek succesvol teruggebracht!"
+  search_bnf_title: "BnF-zoeken"
+  search_isbn: "ISBN {isbn} zoeken..."
+  search_title_author: "Titel/auteur zoeken..."
+  search_completed: "Zoeken voltooid!"
+  error_title: "Fout"
+  search_error: "Fout tijdens zoeken: {error}"
+  borrow_impossible: "Lenen onmogelijk"
+  borrow_not_av: "Dit boek is niet beschikbaar"
+  delete_confirm: "Wilt u dit boek verwijderen?"
+  delete_success_title: "Boek verwijderd"
+  delete_success_body: "Het boek is succesvol verwijderd"
+  delete_title: "Verwijdering"
+  no_open_loan_message: "Leningfout"
+  no_open_loan_title: "Geen lening is open voor dit boek"
+
+column:
+  id: "ID"
+  code: "Code"
+  title: "Titel"
+  volume: "Deel"
+  author: "Auteur"
+  year: "Jaar"
+  isbn: "ISBN"
+  publisher: "Uitgever"
+  fund: "Fonds"
+  available: "Beschikbaar"
+
+checkout:
+  title: "Lenen: {book_title}"
+  label_member: "Lid:"
+  label_due_date: "Terug op:"
+
+import_dialog:
+  title: "Boeken importeren"
+  no_file_label: "(geen bestand)"
+  browse_button: "Kies een bestand…"
+  options_label: "Importopties"
+  policy_label: "Updatebeleid:"
+  policy_merge: "Samenvoegen"
+  policy_skip: "Overslaan"
+  policy_replace: "Vervangen"
+  enrichment_label: "Automatische verrijking"
+  chk_bnf_fallback: "Gebruik titel + auteur als ISBN leeg is (minder betrouwbaar)"
+  chk_openlibrary: "Gebruik OpenLibrary als BnF niets vindt"
+  report_table_headers:
+    line: "Regel"
+    field: "Veld"
+    severity: "Ernst"
+    message: "Bericht"
+  export_report_button: "Rapport exporteren…"
+  import_button: "Importeren"
+  file_dialog_title: "Kies een bestand"
+  progress:
+    reading: "Lezen…"
+    validation: "Validatie…"
+    saving: "Opslaan…"
+  import_done_title: "Import voltooid"
+  import_done_message: "records verwerkt."
+  error_read_headers_title: "Lezen"
+  error_read_headers_message: "Kan headers niet lezen:\n{error}"
+  error_no_file_title: "Import"
+  error_no_file_message: "Kies eerst een bestand."
+  error_no_mapping_title: "Import"
+  error_no_mapping_message: "Geen mapping gedefinieerd."
+
+loan_dialog:
+  title: "Nieuwe lening"
+  label_book: "Boek:"
+  label_member: "Lid:"
+
+statusbar:
+  ready: "Klaar!"
+
+map_columns_dialog:
+  title: "Kolomtoewijzing"
+  info_label: "Koppel elk databaseveld (links) aan de overeenkomstige kolomnaam uit uw bestand (rechts)."
+  tip_label: "Tip: Laat op '(negeren)' staan als de kolom niet bestaat in uw bestand."
+  ignore_option: "(negeren)"
+
+member:
+  member_no: "Lidnr:"
+  first_name: "Voornaam:"
+  last_name: "Achternaam:"
+  email: "Email:"
+  phone: "Telefoon:"
+  status: "Status:"
+  is_active_label: "Actief:"
+  is_nonactive_status: "Inactief"
+  is_active_status: "Actief"
+  status_apprenti: "Leerling"
+  status_compagnon: "Gezel"
+  status_maitre: "Meester"
+  is_active: "Het lid is actief"
+
+member_list:
+  search_label: "Zoeken:"
+  loan_history: "Leningsgeschiedenis"
+  delete_title: "Lid verwijderen"
+  delete_confirm: "Wilt u het lid verwijderen: "
+  delete_success_title: "Verwijderd"
+  delete_success_body: "Het lid is verwijderd!"
+
+context:
+  edit: "Bewerken"
+  delete: "Verwijderen"
+  borrow: "Lenen"
+  return: "Lening terugbrengen"
+  open_bnf: "BnF aanvullen"
+  new_book: "Nieuw boek"
+  history: "Leningsgeschiedenis"
+  new_member: "Nieuw lid"
+  export: "Lijst exporteren..."
+
+export:
+  dialog:
+    title: "Exportconfiguratie"
+    format_section: "Bestandsformaat"
+    columns_section: "Te exporteren kolommen"
+    columns_info: "Selecteer de kolommen die in de export moeten worden opgenomen:"
+    column_mandatory: "Deze kolom is verplicht"
+    metadata_section: "Metadata"
+    meta_date: "Exportdatum opnemen"
+    meta_count: "Recordaantal opnemen"
+    meta_custom: "Aangepast bericht opnemen"
+    meta_custom_placeholder: "Uw aangepaste bericht..."
+  save_title: "Export opslaan"
+  sheet_name:
+    books: "Boeken"
+    members: "Leden"
+    loans: "Leningen"
+  success_title: "Export geslaagd"
+  success_message: "{count} boek(en) geëxporteerd naar:\n{path}"
+  error_title: "Exportfout"
+  error_message: "Kan gegevens niet exporteren:\n{error}"
+  metadata:
+    date: "Geëxporteerd op"
+    count: "Aantal records"
+  progress:
+    message: "Export bezig..."
+  cancel: "Annuleren"
+  not_available_title: "Export niet beschikbaar"
+  not_available_body: "Export is niet beschikbaar voor deze weergave."
+  not_available_loans: "Leningen exporteren komt binnenkort beschikbaar."
+  split_choice_title: "Kies weergave om te exporteren"
+  split_choice_body: "Wilt u Boeken (Ja) of Leden (Nee) exporteren?"
+  split_button_books: "Boeken"
+  split_button_members: "Leden"
+  split_button_cancel: "Annuleren"
+
+about:
+  description_title: "Beschrijving"
+  description_text: "Zoals de dageraad de duisternis verdrijft, bewaart en deelt Aurora het licht van kennis. Moderne bibliotheek collectiebeheertoepassing, ontworpen in de geest van de grote humanistische bibliotheken."
+  author_title: "Ontwikkeling"
+  author_label: "Auteur"
+  license_title: "Licentie"
+  license_text: "Deze software wordt gedistribueerd onder {license} licentie."
+  website_label: "Website"
+  email_label: "Contact"
+  source_request: "Broncode beschikbaar op aanvraag via contact@6f4.be"
+  title: "Over"
+  body: "Aurora is een bibliotheekbeheertoepassing."
+
+overdue_alert:
+  title: "⚠️ Te late leningen"
+  message_singular: "Er is 1 te laat boek."
+  message_plural: "Er zijn {count} te late boeken."
+  view_button: "Te late weergeven"
+  close_button: "Sluiten"
+
+import_members_dialog:
+  title: "Leden importeren"
+  file_dialog_title: "Selecteer een ledenbestand"
+  policy_label: "Als lid al bestaat:"
+  policy_skip: "Overslaan"
+  policy_update: "Bijwerken"

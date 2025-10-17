@@ -1,0 +1,44 @@
+{
+  "title": [
+    "title", "titre", "book", "livre", "nom", "name", "ouvrage", "designation",
+    "book_title", "titre_ouvrage", "nom_livre", "titre_livre", "intitulé"
+  ],
+  "author": [
+    "author", "auteur", "auteur(s)", "authors", "écrivain", "writer", "creator",
+    "by", "de", "écrit_par", "créé_par", "contributeur", "author_name", "auteurs"
+  ],
+  "isbn": [
+    "isbn", "isbn13", "isbn10", "ean", "code_barre", "barcode", "code",
+    "code_ean", "ean13", "isbn_13", "isbn_10", "code_isbn"
+  ],
+  "year": [
+    "year", "année", "date", "an", "annee", "edition", "parution", "published",
+    "pub_date", "publication", "copyright", "année_publication", "date_pub",
+    "year_published", "date_publication"
+  ],
+  "publisher": [
+    "publisher", "éditeur", "maison", "edition", "editeur", "press",
+    "éditions", "publishing", "house", "publishing_house", "maison_edition",
+    "éd", "ed", "publisher_name"
+  ],
+  "code": [
+    "code", "ref", "référence", "reference", "id", "numéro", "num", "identifier",
+    "code_ref", "reference_code", "item_id", "book_id", "code_livre"
+  ],
+  "volume": [
+    "volume", "tome", "vol", "number", "numero", "n°", "part",
+    "volume_number", "tome_number", "#", "no", "partie"
+  ],
+  "fund": [
+    "fonds", "fund", "collection", "série", "serie", "series",
+    "fonds_doc", "collection_name", "série_name", "fund_name"
+  ],
+  "copies_total": [
+    "copies_total", "exemplaires", "copies", "total", "quantité", "qte", "quantity", "stock",
+    "nb_exemplaires", "total_copies", "stock_total", "quantite_totale"
+  ],
+  "copies_available": [
+    "copies_available", "disponibles", "available", "libre", "dispo", "free", "libres",
+    "nb_disponibles", "available_copies", "stock_libre", "exemplaires_libres"
+  ]
+}

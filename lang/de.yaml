@@ -1,0 +1,359 @@
+# lang/de.yaml
+
+menu:
+  file: "Datei"
+  file_new_book: "Neues Buch…"
+  file_import: "Importieren…"
+  file_quit: "Beenden"
+  file_new_member: "Neues Mitglied..."
+  file_new_loan: "Neue Ausleihe..."
+  
+  view: "Ansicht"
+  view_dashboard: "Dashboard"
+  view_books: "Bücher"
+  view_members: "Mitglieder"
+  view_loans: "Ausleihen"
+  view_split: "Geteilte Ansicht"
+  
+  edit: "Bearbeiten"
+  edit_delete_item: "Löschen..."
+  edit_return: "Ausleihe zurückgeben..."
+  
+  help: "Hilfe"
+  about: "Über…"
+
+dashboard:
+  view_title: "Dashboard"
+  detach_tooltip: "Dashboard in ein separates Fenster lösen"
+  new_book_button: "Neues Buch"
+  new_member_button: "Neues Mitglied"
+  new_loan_button: "Neue Ausleihe"
+
+kpi:
+  books_label: "Bücher (Datensätze)"
+  copies_total_label: "Exemplare (gesamt)"
+  copies_available_label: "Exemplare (verfügbar)"
+  availability_label: "Verfügbarkeit (%)"
+  members_label: "Mitglieder"
+  open_loans_label: "Offene Ausleihen"
+  overdues_label: "Überfällig"
+
+loan_dialogs:
+  new_loan_title: "Neue Ausleihe"
+  due_date_field_label: "Fälligkeitsdatum"
+  return_loan_title: "Eine Ausleihe zurückgeben"
+
+loan_list:
+  filter:
+    label: "Filter:"
+    search_placeholder: "Suche (Titel, Mitglied...)"
+  refresh_button: "Aktualisieren"
+  table:
+    col_id: "ID"
+    col_book: "Buch"
+    col_member: "Mitglied"
+    col_loan_date: "Ausleihdatum"
+    col_due_date: "Fälligkeitsdatum"
+    col_return_date: "Zurückgegeben"
+    col_overdue: "Überfällig"
+  status_overdue: "Überfällig"
+  status:
+    all: "Alle"
+    open: "Offen"
+    returned: "Zurückgegeben"
+  context_menu:
+    return_action: "Als zurückgegeben markieren"
+  context_return_book: "Buch zurückgeben"
+  status_label: "Status:"
+  all_status: "Alle"
+  overdue_only_checkbox: "Nur überfällig"
+  search_label: "Suche:"
+  return_error_title: "Fehler"
+  return_error_message: "Dieses Buch kann nicht zurückgegeben werden"
+  return_success_title: "Ausleihe zurückgegeben"
+  return_success_message: "Das Buch wurde zurückgegeben"
+
+action:
+  import_members: "Mitglieder importieren"
+
+errors:
+  action_impossible: "Aktion unmöglich"
+  no_copies_available: "Keine Exemplare dieses Buchs verfügbar."
+  missing_data: "Fehlende Daten"
+  member_not_selected: "Bitte wählen Sie ein Mitglied aus."
+  unexpected_error: "Fehler"
+  unexpected_error_message: "Ein unerwarteter Fehler ist aufgetreten: {error}"
+  error_title: "Fehler"
+  delete_book_title: "Fehler"
+  delete_member_title: "Fehler"
+  delete_book_body: "Fehler beim Löschen des Buchs"
+  delete_member_body: "Fehler beim Löschen des Mitglieds"
+  book_not_selected: "Bitte wählen Sie ein Buch aus."
+
+preferences:
+  title: "Einstellungen"
+  language: "Anwendungssprache"
+  theme: "Thema"
+  startup_view: "Startansicht"
+  language_changed_title: "Sprachänderung"
+  language_changed_body: "Die Sprache wird beim nächsten Start der Anwendung aktualisiert."
+  saved_body: "Einstellungen gespeichert. Die Sprache wird beim nächsten Start angewendet."
+  remember_geometry_label: "Fensterposition merken"
+  show_overdue_alert: "Warnung beim Start anzeigen, wenn es überfällige Ausleihen gibt"
+  section_appearance: "🎨 Erscheinungsbild"
+  section_interface: "🖥️ Benutzeroberfläche"
+  section_columns: "📊 Sichtbare Spalten"
+  section_alerts: "🔔 Warnungen & Benachrichtigungen"
+  days: "Tage"
+  books: "Bücher"
+  section_loans: "📚 Ausleihen"
+  default_loan_days: "Standard-Ausleihdauer"
+
+buttons:
+  save: "Speichern"
+  cancel: "Abbrechen"
+  choose: "Auswählen"
+  bnf_complete: "Über BnF vervollständigen"
+  validate_loan: "Dieses Buch ausleihen"
+
+member_editor:
+  edit_title: "Mitglied bearbeiten"
+  new_title: "Neues Mitglied"
+  error_first_name_required: "Fehler: Vorname ist erforderlich!"
+  error_last_name_required: "Fehler: Nachname ist erforderlich!"
+  error_title: "Fehler"
+  error_save: "Speichern nicht möglich: "
+
+messages:
+  validation_title: "Validierung"
+  validation_missing_title: "Der Titel ist erforderlich."
+  validation_invalid_copies_count: "Die Anzahl verfügbarer Exemplare kann nicht größer als die Gesamtzahl sein."
+  success: "Erfolg"
+  loan_success: "Das Buch '{book_title}' wurde erfolgreich ausgeliehen."
+  loan_created_successfully: "Ausleihe erfolgreich erstellt!"
+
+tooltip:
+  refresh: "Aktuelle Ansicht aktualisieren (F5)"
+
+window:
+  title: "Aurora AE – Bibliotheksverwaltung - V 1.0)"
+
+bnf_select:
+  title: "BnF-Datensatz auswählen"
+  multiple_results: "Mehrere Ergebnisse gefunden:"
+  unknown_title: "Unbekannter Titel"
+  unknown_author: "Unbekannter Autor"
+
+book_editor:
+  window_edit: "Buch bearbeiten"
+  window_new: "Neues Buch"
+  label_author: "Autor:"
+  author: "Autor:"
+  label_category: "Kategorie:"
+  label_code: "Code:"
+  label_copies_available: "Verfügbare Exemplare:"
+  label_copies_total: "Exemplare gesamt:"
+  label_fund: "Fonds:"
+  label_isbn: "ISBN:"
+  label_publisher: "Verlag:"
+  label_title: "Titel:"
+  label_volume: "Band:"
+  label_year: "Erscheinungsjahr:"
+  category: "Kategorie:"
+  code: "Code:"
+  copies_available: "Verfügbare Exemplare:"
+  copies_total: "Exemplare gesamt:"
+  fund: "Fonds:"
+  isbn: "ISBN:"
+  publisher: "Verlag:"
+  title: "Titel:"
+  volume: "Band:"
+  year: "Erscheinungsjahr:"
+
+bnf_search:
+  title: "BnF-Suche"
+  no_results: "Keine Ergebnisse gefunden."
+  error_title: "BnF-Fehler"
+  error_message: "Ein Fehler ist bei der Kommunikation mit dem BnF-Service aufgetreten: {error}"
+
+book_list:
+  search_label: "Suche:"
+  borrow_success_title: "Ausleihe"
+  borrow_success_message: "Buch erfolgreich ausgeliehen!"
+  return_success_title: "Rückgabe"
+  return_success_message: "Buch erfolgreich zurückgegeben!"
+  search_bnf_title: "BnF-Suche"
+  search_isbn: "Suche ISBN {isbn}..."
+  search_title_author: "Suche Titel/Autor..."
+  search_completed: "Suche abgeschlossen!"
+  error_title: "Fehler"
+  search_error: "Fehler bei der Suche: {error}"
+  borrow_impossible: "Ausleihe unmöglich"
+  borrow_not_av: "Dieses Buch ist nicht verfügbar"
+  delete_confirm: "Möchten Sie dieses Buch löschen?"
+  delete_success_title: "Buch gelöscht"
+  delete_success_body: "Das Buch wurde erfolgreich gelöscht"
+  delete_title: "Löschen"
+  no_open_loan_message: "Ausleihfehler"
+  no_open_loan_title: "Für dieses Buch ist keine Ausleihe offen"
+
+column:
+  id: "ID"
+  code: "Code"
+  title: "Titel"
+  volume: "Band"
+  author: "Autor"
+  year: "Jahr"
+  isbn: "ISBN"
+  publisher: "Verlag"
+  fund: "Fonds"
+  available: "Verfügbar"
+
+checkout:
+  title: "Ausleihen: {book_title}"
+  label_member: "Mitglied:"
+  label_due_date: "Zurück bis:"
+
+import_dialog:
+  title: "Bücher importieren"
+  no_file_label: "(keine Datei)"
+  browse_button: "Datei auswählen…"
+  options_label: "Import-Optionen"
+  policy_label: "Update-Richtlinie:"
+  policy_merge: "Zusammenführen"
+  policy_skip: "Überspringen"
+  policy_replace: "Ersetzen"
+  enrichment_label: "Automatische Anreicherung"
+  chk_bnf_fallback: "Titel + Autor verwenden wenn ISBN leer ist (weniger zuverlässig)"
+  chk_openlibrary: "OpenLibrary verwenden wenn BnF nichts findet"
+  report_table_headers:
+    line: "Zeile"
+    field: "Feld"
+    severity: "Schweregrad"
+    message: "Nachricht"
+  export_report_button: "Bericht exportieren…"
+  import_button: "Importieren"
+  file_dialog_title: "Datei auswählen"
+  progress:
+    reading: "Lesen…"
+    validation: "Validierung…"
+    saving: "Speichern…"
+  import_done_title: "Import abgeschlossen"
+  import_done_message: "Datensätze verarbeitet."
+  error_read_headers_title: "Lesen"
+  error_read_headers_message: "Kopfzeilen können nicht gelesen werden:\n{error}"
+  error_no_file_title: "Import"
+  error_no_file_message: "Wählen Sie zuerst eine Datei aus."
+  error_no_mapping_title: "Import"
+  error_no_mapping_message: "Keine Zuordnung definiert."
+
+loan_dialog:
+  title: "Neue Ausleihe"
+  label_book: "Buch:"
+  label_member: "Mitglied:"
+
+statusbar:
+  ready: "Bereit!"
+
+map_columns_dialog:
+  title: "Spaltenzuordnung"
+  info_label: "Ordnen Sie jedes Datenbankfeld (links) dem entsprechenden Spaltennamen aus Ihrer Datei (rechts) zu."
+  tip_label: "Tipp: Lassen Sie auf '(ignorieren)' wenn die Spalte in Ihrer Datei nicht existiert."
+  ignore_option: "(ignorieren)"
+
+member:
+  member_no: "Mitgliedsnr.:"
+  first_name: "Vorname:"
+  last_name: "Nachname:"
+  email: "E-Mail:"
+  phone: "Telefon:"
+  status: "Status:"
+  is_active_label: "Aktiv:"
+  is_nonactive_status: "Inaktiv"
+  is_active_status: "Aktiv"
+  status_apprenti: "Lehrling"
+  status_compagnon: "Geselle"
+  status_maitre: "Meister"
+  is_active: "Das Mitglied ist aktiv"
+
+member_list:
+  search_label: "Suche:"
+  loan_history: "Ausleihhistorie"
+  delete_title: "Mitglied löschen"
+  delete_confirm: "Möchten Sie das Mitglied löschen: "
+  delete_success_title: "Gelöscht"
+  delete_success_body: "Das Mitglied wurde gelöscht!"
+
+context:
+  edit: "Bearbeiten"
+  delete: "Löschen"
+  borrow: "Ausleihen"
+  return: "Ausleihe zurückgeben"
+  open_bnf: "BnF vervollständigen"
+  new_book: "Neues Buch"
+  history: "Ausleihhistorie"
+  new_member: "Neues Mitglied"
+  export: "Liste exportieren..."
+
+export:
+  dialog:
+    title: "Exportkonfiguration"
+    format_section: "Dateiformat"
+    columns_section: "Zu exportierende Spalten"
+    columns_info: "Wählen Sie die Spalten aus, die in den Export aufgenommen werden sollen:"
+    column_mandatory: "Diese Spalte ist erforderlich"
+    metadata_section: "Metadaten"
+    meta_date: "Exportdatum einschließen"
+    meta_count: "Datensatzanzahl einschließen"
+    meta_custom: "Benutzerdefinierte Nachricht einschließen"
+    meta_custom_placeholder: "Ihre benutzerdefinierte Nachricht..."
+  save_title: "Export speichern"
+  sheet_name:
+    books: "Bücher"
+    members: "Mitglieder"
+    loans: "Ausleihen"
+  success_title: "Export erfolgreich"
+  success_message: "{count} Buch/Bücher exportiert nach:\n{path}"
+  error_title: "Exportfehler"
+  error_message: "Daten können nicht exportiert werden:\n{error}"
+  metadata:
+    date: "Exportiert am"
+    count: "Anzahl der Datensätze"
+  progress:
+    message: "Export läuft..."
+  cancel: "Abbrechen"
+  not_available_title: "Export nicht verfügbar"
+  not_available_body: "Export ist für diese Ansicht nicht verfügbar."
+  not_available_loans: "Ausleihen-Export wird in Kürze verfügbar sein."
+  split_choice_title: "Ansicht zum Exportieren wählen"
+  split_choice_body: "Möchten Sie Bücher (Ja) oder Mitglieder (Nein) exportieren?"
+  split_button_books: "Bücher"
+  split_button_members: "Mitglieder"
+  split_button_cancel: "Abbrechen"
+
+about:
+  description_title: "Beschreibung"
+  description_text: "Wie die Morgenröte die Dunkelheit vertreibt, bewahrt und teilt Aurora das Licht des Wissens. Moderne Bibliothekssammlungs-Verwaltungsanwendung, entworfen im Geiste der großen humanistischen Bibliotheken."
+  author_title: "Entwicklung"
+  author_label: "Autor"
+  license_title: "Lizenz"
+  license_text: "Diese Software wird unter {license} Lizenz vertrieben."
+  website_label: "Webseite"
+  email_label: "Kontakt"
+  source_request: "Quellcode auf Anfrage verfügbar unter contact@6f4.be"
+  title: "Über"
+  body: "Aurora ist eine Bibliotheksverwaltungsanwendung."
+
+overdue_alert:
+  title: "⚠️ Überfällige Ausleihen"
+  message_singular: "Es gibt 1 überfälliges Buch."
+  message_plural: "Es gibt {count} überfällige Bücher."
+  view_button: "Überfällige anzeigen"
+  close_button: "Schließen"
+
+import_members_dialog:
+  title: "Mitglieder importieren"
+  file_dialog_title: "Mitgliederdatei auswählen"
+  policy_label: "Wenn Mitglied bereits existiert:"
+  policy_skip: "Überspringen"
+  policy_update: "Aktualisieren"
