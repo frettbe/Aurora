@@ -104,10 +104,16 @@ preferences:
   section_interface: "🖥️ Interface"
   section_columns: "📊 Visible columns"
   section_alerts: "🔔 Alerts & Notifications"
+  enforce_skill_level_policy: "Enforce skill level policy (apprentice/journeyman/master)"
+  section_loan_policy: "Loan Policy"
+  loan_duration_apprenti: "Apprentice loan duration"
+  loan_duration_compagnon: "Journeyman loan duration"
+  loan_duration_maitre: "Master loan duration"
+  loan_max_books_apprenti: "Apprentice max quota"
+  loan_max_books_compagnon: "Journeyman max quota"
+  loan_max_books_maitre: "Master max quota"
   days: "days"
   books: "books"
-  section_loans: "📚 Loans"
-  default_loan_days: "Default loan duration"
 
 buttons:
   save: "Save"
@@ -169,6 +175,8 @@ book_editor:
   title: "Title:"
   volume: "Volume:"
   year: "Publication year:"
+  label_summary: "Summary"
+  summary_placeholder: "Book summary (optional)..."
 
 bnf_search:
   title: "BnF search"
@@ -208,6 +216,7 @@ column:
   publisher: "Publisher"
   fund: "Fund"
   available: "Available"
+  summary: "Summary"
 
 checkout:
   title: "Borrow: {book_title}"

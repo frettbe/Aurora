@@ -47,6 +47,7 @@ class Preferences:
             "publisher",
             "fund",
             "available",
+            "summary",
         ]
     )
     members_visible_columns: list[str] = field(

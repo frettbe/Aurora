@@ -104,10 +104,16 @@ preferences:
   section_interface: "🖥️ Interface"
   section_columns: "📊 Zichtbare kolommen"
   section_alerts: "🔔 Waarschuwingen & Meldingen"
+  enforce_skill_level_policy: "Vaardigheidsniveaubeleid toepassen (leerling/gezel/meester)"
+  section_loan_policy: "Leningbeleid"
+  loan_duration_apprenti: "Leerling leningduur"
+  loan_duration_compagnon: "Gezel leningduur"
+  loan_duration_maitre: "Meester leningduur"
+  loan_max_books_apprenti: "Leerling max quotum"
+  loan_max_books_compagnon: "Gezel max quotum"
+  loan_max_books_maitre: "Meester max quotum"
   days: "dagen"
   books: "boeken"
-  section_loans: "📚 Leningen"
-  default_loan_days: "Standaard leningduur"
 
 buttons:
   save: "Opslaan"
@@ -169,6 +175,8 @@ book_editor:
   title: "Titel:"
   volume: "Deel:"
   year: "Publicatiejaar:"
+  label_summary: "Samenvatting"
+  summary_placeholder: "Boeksamenvatting (optioneel)..."
 
 bnf_search:
   title: "BnF-zoeken"
@@ -208,6 +216,7 @@ column:
   publisher: "Uitgever"
   fund: "Fonds"
   available: "Beschikbaar"
+  summary: "Samenvatting"
 
 checkout:
   title: "Lenen: {book_title}"

@@ -134,6 +134,7 @@ class PreferencesDialog(QDialog):
             "publisher": translate("column.publisher"),
             "fund": translate("column.fund"),
             "available": translate("column.available"),
+            "summary": translate("column.summary")
         }
 
         # Colonnes obligatoires (non décochables)

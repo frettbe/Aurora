@@ -48,6 +48,7 @@ class BookTableModel(QAbstractTableModel):
         "publisher": "Éditeur",
         "fund": "Fonds",
         "available": "Disponible",
+        "summary": "Résumé",
     }
 
     def __init__(self, visible_columns: list[str] | None = None):
@@ -127,6 +128,8 @@ class BookTableModel(QAbstractTableModel):
                 return book.fund or ""
             elif col_name == "available":
                 return f"{book.copies_available}/{book.copies_total}"
+            elif col_name == "summary":
+                return (book.summary or "")[:50] + ("..." if len(book.summary or "") > 50 else "")
 
         elif role == Qt.ItemDataRole.UserRole:
             # Retourner l'objet book complet
@@ -630,6 +633,11 @@ class BookListView(QWidget):
             except (ValueError, TypeError):
                 print(f"    ⚠️ Année invalide: '{result.year}'")
 
+        # 7. Résumé seulement si vraiment absent  # 🆕 NOUVEAU
+        if is_empty(book.summary) and has_data(result.summary):
+            changes["summary"] = result.summary
+            print(f" ✅ Résumé à enrichir: '{result.summary[:50]}...'")
+
         print(f"  📋 Changements détectés: {len(changes)}")
         for field, value in changes.items():
             print(f"    - {field}: '{value}'")
@@ -789,6 +797,9 @@ class BookListView(QWidget):
                         value = book.collection or ""
                     elif col_id == "available":
                         value = f"{book.copies_available}/{book.copies_total}"
+                    elif col_id == "summary":
+                        value = book.summary or ""
+
                     else:
                         value = ""
 

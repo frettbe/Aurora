@@ -12,7 +12,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-_APP_NAME = "Aurora"
+_APP_NAME = "Aurora-Community"
 _AUTHOR = "6f4Software"
 
 

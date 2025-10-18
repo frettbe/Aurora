@@ -1,5 +1,4 @@
-"""
-Définition des modèles de données SQLAlchemy pour l'application Biblio.
+"""Définition des modèles de données SQLAlchemy pour l'application Biblio.
 
 Ce module contient les classes qui mappent les objets Python aux tables de la
 base de données via l'ORM SQLAlchemy. Il définit la structure des tables,
@@ -7,10 +6,10 @@ les relations entre elles (y compris many-to-many), et les types de données
 pour les livres, auteurs, membres et prêts.
 
 Classes principales :
-- Author: Représente un auteur.
-- Book: Représente une fiche de livre, avec ses métadonnées.
-- Member: Représente un membre de la bibliothèque.
-- Loan: Représente un prêt d'un livre à un membre.
+    - Author: Représente un auteur.
+    - Book: Représente une fiche de livre, avec ses métadonnées.
+    - Member: Représente un membre de la bibliothèque.
+    - Loan: Représente un prêt d'un livre à un membre.
 
 Contient également les tables d'association et les énumérations (Enum)
 pour les statuts et catégories.
@@ -87,8 +86,7 @@ class LoanStatus(str, enum.Enum):
 
 
 class Book(Base):
-    """
-    Modèle ORM pour un Livre.
+    """Modèle ORM pour un Livre.
 
     Cette table est la 'source de vérité' pour toutes les informations
     relatives à un livre. Elle contient des alias via des 'hybrid_property'
@@ -112,6 +110,7 @@ class Book(Base):
     code_interne: Mapped[str | None] = mapped_column(String, index=True)
     mots_cles: Mapped[str | None] = mapped_column(String)
     category: Mapped[BookCategory | None] = mapped_column(Enum(BookCategory))
+    summary: Mapped[str | None] = mapped_column(Text)  # 🆕 NOUVEAU : Résumé du livre
 
     # --- Relations ---
     authors = relationship("Author", secondary=book_authors, back_populates="books")
@@ -151,8 +150,6 @@ class Book(Base):
         """Alias pour collection (compatibilité vue)."""
         return self.collection
 
-    # ... (les autres alias peuvent être documentés de la même manière) ...
-
 
 class Member(Base):
     """Modèle ORM pour un Membre de la bibliothèque."""
@@ -167,6 +164,7 @@ class Member(Base):
     status: Mapped[MemberStatus] = mapped_column(Enum(MemberStatus), default=MemberStatus.apprenti)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     date_joined: Mapped[date | None] = mapped_column(Date)
+
     __table_args__ = (Index("ix_members_last_first", "last_name", "first_name"),)
 
 
@@ -198,7 +196,6 @@ class AuditLog(Base):
     """Table d'audit des actions utilisateur."""
 
     __tablename__ = "audit_logs"
-
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     timestamp: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow, index=True)
     action: Mapped[str] = mapped_column(
@@ -213,4 +210,4 @@ class AuditLog(Base):
     level: Mapped[str] = mapped_column(String(10), default="INFO")  # INFO, WARNING, ERROR
 
     def __repr__(self):
-        return f"<AuditLog {self.timestamp} {self.action} {self.entity_type}>"
+        return f"<AuditLog(action={self.action}, entity={self.entity_type}/{self.entity_id})>"

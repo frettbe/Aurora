@@ -103,10 +103,16 @@ preferences:
   section_interface: "🖥️ Interface"
   section_columns: "📊 Colonnes visibles"
   section_alerts: "🔔 Alertes & Notifications"
+  enforce_skill_level_policy: "Appliquer la politique de niveau de compétence (apprenti/compagnon/maître)"
+  section_loan_policy: "Politique de prêt"
+  loan_duration_apprenti: "Durée prêt Apprenti"
+  loan_duration_compagnon: "Durée prêt Compagnon"
+  loan_duration_maitre: "Durée prêt Maître"
+  loan_max_books_apprenti: "Quota max Apprenti"
+  loan_max_books_compagnon: "Quota max Compagnon"
+  loan_max_books_maitre: "Quota max Maître"
   days: "jours"
   books: "livres"
-  section_loans: "📚 Prêts"
-  default_loan_days: "Durée de prêt par défaut"
 
 buttons:
   save: "Enregistrer"
@@ -170,6 +176,8 @@ book_editor:
   title: "Titre :"
   volume: "Tome :"
   year: "Année d'édition :"
+  label_summary: "Résumé"
+  summary_placeholder: "Résumé du livre (optionnel)..."
 
 bnf_search:
   title: "Recherche BnF"
@@ -308,6 +316,7 @@ column:
   fund: "Fonds"
   available: "Disponible"
   volume: "Tome"
+  summary: "Résumé"
   
 export:
   dialog:

@@ -52,6 +52,7 @@ def _notice_to_dict(record: ET.Element) -> dict[str, str]:
     publishers = _extract_dc_text(md, "publisher")
     dates = _extract_dc_text(md, "date")
     identifiers = _extract_dc_text(md, "identifier")
+    descriptions = _extract_dc_text(md, "description")
 
     # repérer un ISBN plausible dans 'identifier'
     isbn = ""
@@ -69,6 +70,7 @@ def _notice_to_dict(record: ET.Element) -> dict[str, str]:
         "publisher": publishers[0] if publishers else "",
         "year": (dates[0][:4] if dates and dates[0][:4].isdigit() else ""),
         "isbn": isbn,
+        "summary": descriptions[0] if descriptions else "",
     }
 
 

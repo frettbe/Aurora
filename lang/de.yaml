@@ -104,10 +104,16 @@ preferences:
   section_interface: "🖥️ Benutzeroberfläche"
   section_columns: "📊 Sichtbare Spalten"
   section_alerts: "🔔 Warnungen & Benachrichtigungen"
+  enforce_skill_level_policy: "Kompetenzniveau-Richtlinie anwenden (Lehrling/Geselle/Meister)"
+  section_loan_policy: "Ausleihrichtlinie"
+  loan_duration_apprenti: "Lehrling Ausleihdauer"
+  loan_duration_compagnon: "Geselle Ausleihdauer"
+  loan_duration_maitre: "Meister Ausleihdauer"
+  loan_max_books_apprenti: "Lehrling max. Kontingent"
+  loan_max_books_compagnon: "Geselle max. Kontingent"
+  loan_max_books_maitre: "Meister max. Kontingent"
   days: "Tage"
   books: "Bücher"
-  section_loans: "📚 Ausleihen"
-  default_loan_days: "Standard-Ausleihdauer"
 
 buttons:
   save: "Speichern"
@@ -169,6 +175,8 @@ book_editor:
   title: "Titel:"
   volume: "Band:"
   year: "Erscheinungsjahr:"
+  label_summary: "Zusammenfassung"
+  summary_placeholder: "Buchzusammenfassung (optional)..."
 
 bnf_search:
   title: "BnF-Suche"
@@ -208,6 +216,7 @@ column:
   publisher: "Verlag"
   fund: "Fonds"
   available: "Verfügbar"
+  summary: "Zusammenfassung"
 
 checkout:
   title: "Ausleihen: {book_title}"
