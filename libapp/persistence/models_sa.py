@@ -59,21 +59,6 @@ class Author(Base):
 # --- Énumérations pour les statuts et catégories ---
 
 
-class MemberStatus(str, enum.Enum):
-    """Définit les statuts possibles pour un membre."""
-
-    apprenti = "apprenti"
-    compagnon = "compagnon"
-    maitre = "maitre"
-
-
-class BookCategory(str, enum.Enum):
-    """Définit les catégories possibles pour un livre."""
-
-    apprenti = "apprenti"
-    compagnon = "compagnon"
-    maitre = "maitre"
-
 
 class LoanStatus(str, enum.Enum):
     """Définit les statuts possibles pour un prêt."""
@@ -109,8 +94,8 @@ class Book(Base):
     volume: Mapped[int | None] = mapped_column(Integer)
     code_interne: Mapped[str | None] = mapped_column(String, index=True)
     mots_cles: Mapped[str | None] = mapped_column(String)
-    category: Mapped[BookCategory | None] = mapped_column(Enum(BookCategory))
-    summary: Mapped[str | None] = mapped_column(Text)  # 🆕 NOUVEAU : Résumé du livre
+    summary: Mapped[str | None] = mapped_column(Text)  
+    cover_image: Mapped[str | None] = mapped_column(String(500))
 
     # --- Relations ---
     authors = relationship("Author", secondary=book_authors, back_populates="books")
@@ -161,7 +146,6 @@ class Member(Base):
     last_name: Mapped[str] = mapped_column(String(100))
     email: Mapped[str] = mapped_column(String(255), default="")
     phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
-    status: Mapped[MemberStatus] = mapped_column(Enum(MemberStatus), default=MemberStatus.apprenti)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     date_joined: Mapped[date | None] = mapped_column(Date)
 

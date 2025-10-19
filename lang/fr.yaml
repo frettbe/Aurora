@@ -103,16 +103,9 @@ preferences:
   section_interface: "🖥️ Interface"
   section_columns: "📊 Colonnes visibles"
   section_alerts: "🔔 Alertes & Notifications"
-  enforce_skill_level_policy: "Appliquer la politique de niveau de compétence (apprenti/compagnon/maître)"
-  section_loan_policy: "Politique de prêt"
-  loan_duration_apprenti: "Durée prêt Apprenti"
-  loan_duration_compagnon: "Durée prêt Compagnon"
-  loan_duration_maitre: "Durée prêt Maître"
-  loan_max_books_apprenti: "Quota max Apprenti"
-  loan_max_books_compagnon: "Quota max Compagnon"
-  loan_max_books_maitre: "Quota max Maître"
   days: "jours"
   books: "livres"
+  default_loan_days: "Nombre de jours pour le prêt : "
 
 buttons:
   save: "Enregistrer"
@@ -155,7 +148,6 @@ book_editor:
   window_new: "Nouveau livre"
   label_author: "Autheur :"
   author: "Autheur :"
-  label_category: "Catégorie :"
   label_code: "Code :"
   label_copies_available: "Copies disponibles :"
   label_copies_total: "Copies totales :"
@@ -166,7 +158,6 @@ book_editor:
   label_volume: "Tome :"
   label_year: "Année d'édition :"  
   label_author: "Autheur :"
-  category: "Catégorie :"
   code: "Code :"
   copies_available: "Copies disponibles :"
   copies_total: "Copies totales :"
@@ -178,6 +169,12 @@ book_editor:
   year: "Année d'édition :"
   label_summary: "Résumé"
   summary_placeholder: "Résumé du livre (optionnel)..."
+  cover_label: "Couverture"
+  cover_add_button: "Ajouter une couverture..."
+  cover_remove_button: "Supprimer la couverture"
+  cover_preview_tooltip: "Cliquer pour agrandir"
+  cover_dialog_title: "Sélectionner une image"
+  cover_dialog_filter: "Images (*.png *.jpg *.jpeg)"
 
 bnf_search:
   title: "Recherche BnF"
@@ -217,6 +214,8 @@ book_list:
     publisher: "Éditeur"
     fund: "Fonds"
     available: "Disponible"
+    summary: "Résumé"
+    cover_image: "Couverture"
 
 checkout:
   title: "Emprunter : {book_title}"
@@ -276,13 +275,9 @@ member:
   last_name: "Nom :"
   email: "Email :"
   phone: "Téléphone :"
-  status: "Statut :"
   is_active_label: "Actif :"
   is_nonactive_status: "Non actif"
   is_active_status: "Actif"
-  status_apprenti: "Apprenti"
-  status_compagnon: "Compagnon"
-  status_maitre: "Maitre"
   is_active: "Le membre est actif"
 
 member_list:
@@ -316,7 +311,7 @@ column:
   fund: "Fonds"
   available: "Disponible"
   volume: "Tome"
-  summary: "Résumé"
+
   
 export:
   dialog:

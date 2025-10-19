@@ -7,20 +7,20 @@ menu:
   file_quit: "Afsluiten"
   file_new_member: "Nieuw lid..."
   file_new_loan: "Nieuwe lening..."
-  
-  view: "Weergave"
-  view_dashboard: "Dashboard"
-  view_books: "Boeken"
-  view_members: "Leden"
-  view_loans: "Leningen"
-  view_split: "Gesplitste weergave"
-  
-  edit: "Bewerken"
-  edit_delete_item: "Verwijderen..."
-  edit_return: "Lening terugbrengen..."
-  
-  help: "Help"
-  about: "Over…"
+
+view: "Weergave"
+view_dashboard: "Dashboard"
+view_books: "Boeken"
+view_members: "Leden"
+view_loans: "Leningen"
+view_split: "Gesplitste weergave"
+
+edit: "Bewerken"
+edit_delete_item: "Verwijderen..."
+edit_return: "Lening terugbrengen..."
+
+help: "Help"
+about: "Over…"
 
 dashboard:
   view_title: "Dashboard"
@@ -69,9 +69,9 @@ loan_list:
   overdue_only_checkbox: "Alleen te laat"
   search_label: "Zoeken:"
   return_error_title: "Fout"
-  return_error_message: "Kan dit boek niet terugbrengen"
+  return_error_message: "Kan deze titel niet terugbrengen"
   return_success_title: "Lening teruggebracht"
-  return_success_message: "Het boek is teruggebracht"
+  return_success_message: "Het boek is teruggebracht van lening"
 
 action:
   import_members: "Leden importeren"
@@ -104,23 +104,14 @@ preferences:
   section_interface: "🖥️ Interface"
   section_columns: "📊 Zichtbare kolommen"
   section_alerts: "🔔 Waarschuwingen & Meldingen"
-  enforce_skill_level_policy: "Vaardigheidsniveaubeleid toepassen (leerling/gezel/meester)"
-  section_loan_policy: "Leningbeleid"
-  loan_duration_apprenti: "Leerling leningduur"
-  loan_duration_compagnon: "Gezel leningduur"
-  loan_duration_maitre: "Meester leningduur"
-  loan_max_books_apprenti: "Leerling max quotum"
-  loan_max_books_compagnon: "Gezel max quotum"
-  loan_max_books_maitre: "Meester max quotum"
   days: "dagen"
   books: "boeken"
-
-buttons:
-  save: "Opslaan"
-  cancel: "Annuleren"
-  choose: "Kiezen"
-  bnf_complete: "Aanvullen via BnF"
-  validate_loan: "Dit boek lenen"
+  buttons:
+    save: "Opslaan"
+    cancel: "Annuleren"
+    choose: "Kiezen"
+    bnf_complete: "Aanvullen via BnF"
+    validate_loan: "Dit boek lenen"
 
 member_editor:
   edit_title: "Lid bewerken"
@@ -142,7 +133,7 @@ tooltip:
   refresh: "Huidige weergave vernieuwen (F5)"
 
 window:
-  title: "Aurora AE – Bibliotheekbeheer - V 1.0)"
+  title: "Aurora Community – Bibliotheekbeheer"
 
 bnf_select:
   title: "Selecteer een BnF-record"
@@ -177,12 +168,12 @@ book_editor:
   year: "Publicatiejaar:"
   label_summary: "Samenvatting"
   summary_placeholder: "Boeksamenvatting (optioneel)..."
-
-bnf_search:
-  title: "BnF-zoeken"
-  no_results: "Geen resultaten gevonden."
-  error_title: "BnF-fout"
-  error_message: "Een fout is opgetreden bij communicatie met de BnF-service: {error}"
+  cover_label: "Omslag"
+  cover_add_button: "Omslag toevoegen..."
+  cover_remove_button: "Omslag verwijderen"
+  cover_preview_tooltip: "Klik om te vergroten"
+  cover_dialog_title: "Selecteer een afbeelding"
+  cover_dialog_filter: "Afbeeldingen (*.png *.jpg *.jpeg)"
 
 book_list:
   search_label: "Zoeken:"
@@ -204,19 +195,19 @@ book_list:
   delete_title: "Verwijdering"
   no_open_loan_message: "Leningfout"
   no_open_loan_title: "Geen lening is open voor dit boek"
-
-column:
-  id: "ID"
-  code: "Code"
-  title: "Titel"
-  volume: "Deel"
-  author: "Auteur"
-  year: "Jaar"
-  isbn: "ISBN"
-  publisher: "Uitgever"
-  fund: "Fonds"
-  available: "Beschikbaar"
-  summary: "Samenvatting"
+  column:
+    id: "ID"
+    code: "Code"
+    title: "Titel"
+    volume: "Deel"
+    author: "Auteur"
+    year: "Jaar"
+    isbn: "ISBN"
+    publisher: "Uitgever"
+    fund: "Fonds"
+    available: "Beschikbaar"
+    summary: "Samenvatting"
+    cover_image: "Omslag"
 
 checkout:
   title: "Lenen: {book_title}"
@@ -249,12 +240,6 @@ import_dialog:
     saving: "Opslaan…"
   import_done_title: "Import voltooid"
   import_done_message: "records verwerkt."
-  error_read_headers_title: "Lezen"
-  error_read_headers_message: "Kan headers niet lezen:\n{error}"
-  error_no_file_title: "Import"
-  error_no_file_message: "Kies eerst een bestand."
-  error_no_mapping_title: "Import"
-  error_no_mapping_message: "Geen mapping gedefinieerd."
 
 loan_dialog:
   title: "Nieuwe lening"
@@ -303,55 +288,6 @@ context:
   history: "Leningsgeschiedenis"
   new_member: "Nieuw lid"
   export: "Lijst exporteren..."
-
-export:
-  dialog:
-    title: "Exportconfiguratie"
-    format_section: "Bestandsformaat"
-    columns_section: "Te exporteren kolommen"
-    columns_info: "Selecteer de kolommen die in de export moeten worden opgenomen:"
-    column_mandatory: "Deze kolom is verplicht"
-    metadata_section: "Metadata"
-    meta_date: "Exportdatum opnemen"
-    meta_count: "Recordaantal opnemen"
-    meta_custom: "Aangepast bericht opnemen"
-    meta_custom_placeholder: "Uw aangepaste bericht..."
-  save_title: "Export opslaan"
-  sheet_name:
-    books: "Boeken"
-    members: "Leden"
-    loans: "Leningen"
-  success_title: "Export geslaagd"
-  success_message: "{count} boek(en) geëxporteerd naar:\n{path}"
-  error_title: "Exportfout"
-  error_message: "Kan gegevens niet exporteren:\n{error}"
-  metadata:
-    date: "Geëxporteerd op"
-    count: "Aantal records"
-  progress:
-    message: "Export bezig..."
-  cancel: "Annuleren"
-  not_available_title: "Export niet beschikbaar"
-  not_available_body: "Export is niet beschikbaar voor deze weergave."
-  not_available_loans: "Leningen exporteren komt binnenkort beschikbaar."
-  split_choice_title: "Kies weergave om te exporteren"
-  split_choice_body: "Wilt u Boeken (Ja) of Leden (Nee) exporteren?"
-  split_button_books: "Boeken"
-  split_button_members: "Leden"
-  split_button_cancel: "Annuleren"
-
-about:
-  description_title: "Beschrijving"
-  description_text: "Zoals de dageraad de duisternis verdrijft, bewaart en deelt Aurora het licht van kennis. Moderne bibliotheek collectiebeheertoepassing, ontworpen in de geest van de grote humanistische bibliotheken."
-  author_title: "Ontwikkeling"
-  author_label: "Auteur"
-  license_title: "Licentie"
-  license_text: "Deze software wordt gedistribueerd onder {license} licentie."
-  website_label: "Website"
-  email_label: "Contact"
-  source_request: "Broncode beschikbaar op aanvraag via contact@6f4.be"
-  title: "Over"
-  body: "Aurora is een bibliotheekbeheertoepassing."
 
 overdue_alert:
   title: "⚠️ Te late leningen"

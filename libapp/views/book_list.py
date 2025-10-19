@@ -49,6 +49,7 @@ class BookTableModel(QAbstractTableModel):
         "fund": "Fonds",
         "available": "Disponible",
         "summary": "Résumé",
+        "cover_image": translate("column.cover_image"),
     }
 
     def __init__(self, visible_columns: list[str] | None = None):
@@ -130,6 +131,25 @@ class BookTableModel(QAbstractTableModel):
                 return f"{book.copies_available}/{book.copies_total}"
             elif col_name == "summary":
                 return (book.summary or "")[:50] + ("..." if len(book.summary or "") > 50 else "")
+            elif col_name == "cover_image":
+                # Pas d'affichage texte pour les images
+                return ""
+
+        elif role == Qt.ItemDataRole.DecorationRole:
+            # Affichage des icônes/images dans les cellules
+            if col_name == "cover_image":
+                from PySide6.QtGui import QPixmap
+
+                from ..utils.paths import user_data_dir
+
+                cover_path = getattr(book, "cover_image", None)
+                if cover_path:
+                    full_path = user_data_dir() / cover_path
+                    if full_path.exists():
+                        pixmap = QPixmap(str(full_path))
+                        # Miniature 32x32
+                        return pixmap.scaled(32, 32, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+            return None
 
         elif role == Qt.ItemDataRole.UserRole:
             # Retourner l'objet book complet
@@ -799,6 +819,8 @@ class BookListView(QWidget):
                         value = f"{book.copies_available}/{book.copies_total}"
                     elif col_id == "summary":
                         value = book.summary or ""
+                    elif col_id == "cover_image":
+                        value = book.cover_image or ""
 
                     else:
                         value = ""

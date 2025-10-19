@@ -7,20 +7,20 @@ menu:
   file_quit: "Beenden"
   file_new_member: "Neues Mitglied..."
   file_new_loan: "Neue Ausleihe..."
-  
-  view: "Ansicht"
-  view_dashboard: "Dashboard"
-  view_books: "Bücher"
-  view_members: "Mitglieder"
-  view_loans: "Ausleihen"
-  view_split: "Geteilte Ansicht"
-  
-  edit: "Bearbeiten"
-  edit_delete_item: "Löschen..."
-  edit_return: "Ausleihe zurückgeben..."
-  
-  help: "Hilfe"
-  about: "Über…"
+
+view: "Ansicht"
+view_dashboard: "Dashboard"
+view_books: "Bücher"
+view_members: "Mitglieder"
+view_loans: "Ausleihen"
+view_split: "Geteilte Ansicht"
+
+edit: "Bearbeiten"
+edit_delete_item: "Löschen..."
+edit_return: "Ausleihe zurückgeben..."
+
+help: "Hilfe"
+about: "Über…"
 
 dashboard:
   view_title: "Dashboard"
@@ -69,9 +69,9 @@ loan_list:
   overdue_only_checkbox: "Nur überfällig"
   search_label: "Suche:"
   return_error_title: "Fehler"
-  return_error_message: "Dieses Buch kann nicht zurückgegeben werden"
+  return_error_message: "Diesen Titel kann nicht zurückgegeben werden"
   return_success_title: "Ausleihe zurückgegeben"
-  return_success_message: "Das Buch wurde zurückgegeben"
+  return_success_message: "Das Buch wurde von der Ausleihe zurückgegeben"
 
 action:
   import_members: "Mitglieder importieren"
@@ -142,7 +142,7 @@ tooltip:
   refresh: "Aktuelle Ansicht aktualisieren (F5)"
 
 window:
-  title: "Aurora AE – Bibliotheksverwaltung - V 1.0)"
+  title: "Aurora Community – Bibliotheksverwaltung"
 
 bnf_select:
   title: "BnF-Datensatz auswählen"
@@ -177,12 +177,12 @@ book_editor:
   year: "Erscheinungsjahr:"
   label_summary: "Zusammenfassung"
   summary_placeholder: "Buchzusammenfassung (optional)..."
-
-bnf_search:
-  title: "BnF-Suche"
-  no_results: "Keine Ergebnisse gefunden."
-  error_title: "BnF-Fehler"
-  error_message: "Ein Fehler ist bei der Kommunikation mit dem BnF-Service aufgetreten: {error}"
+  cover_label: "Cover"
+  cover_add_button: "Cover hinzufügen..."
+  cover_remove_button: "Cover entfernen"
+  cover_preview_tooltip: "Klicken zum Vergrößern"
+  cover_dialog_title: "Bild auswählen"
+  cover_dialog_filter: "Bilder (*.png *.jpg *.jpeg)"
 
 book_list:
   search_label: "Suche:"
@@ -204,19 +204,19 @@ book_list:
   delete_title: "Löschen"
   no_open_loan_message: "Ausleihfehler"
   no_open_loan_title: "Für dieses Buch ist keine Ausleihe offen"
-
-column:
-  id: "ID"
-  code: "Code"
-  title: "Titel"
-  volume: "Band"
-  author: "Autor"
-  year: "Jahr"
-  isbn: "ISBN"
-  publisher: "Verlag"
-  fund: "Fonds"
-  available: "Verfügbar"
-  summary: "Zusammenfassung"
+  column:
+      id: "ID"
+      code: "Code"
+      title: "Titel"
+      volume: "Band"
+      author: "Autor"
+      year: "Jahr"
+      isbn: "ISBN"
+      publisher: "Verlag"
+      fund: "Fonds"
+      available: "Verfügbar"
+      summary: "Zusammenfassung"
+      cover_image: "Cover"
 
 checkout:
   title: "Ausleihen: {book_title}"
@@ -249,12 +249,6 @@ import_dialog:
     saving: "Speichern…"
   import_done_title: "Import abgeschlossen"
   import_done_message: "Datensätze verarbeitet."
-  error_read_headers_title: "Lesen"
-  error_read_headers_message: "Kopfzeilen können nicht gelesen werden:\n{error}"
-  error_no_file_title: "Import"
-  error_no_file_message: "Wählen Sie zuerst eine Datei aus."
-  error_no_mapping_title: "Import"
-  error_no_mapping_message: "Keine Zuordnung definiert."
 
 loan_dialog:
   title: "Neue Ausleihe"
@@ -303,55 +297,6 @@ context:
   history: "Ausleihhistorie"
   new_member: "Neues Mitglied"
   export: "Liste exportieren..."
-
-export:
-  dialog:
-    title: "Exportkonfiguration"
-    format_section: "Dateiformat"
-    columns_section: "Zu exportierende Spalten"
-    columns_info: "Wählen Sie die Spalten aus, die in den Export aufgenommen werden sollen:"
-    column_mandatory: "Diese Spalte ist erforderlich"
-    metadata_section: "Metadaten"
-    meta_date: "Exportdatum einschließen"
-    meta_count: "Datensatzanzahl einschließen"
-    meta_custom: "Benutzerdefinierte Nachricht einschließen"
-    meta_custom_placeholder: "Ihre benutzerdefinierte Nachricht..."
-  save_title: "Export speichern"
-  sheet_name:
-    books: "Bücher"
-    members: "Mitglieder"
-    loans: "Ausleihen"
-  success_title: "Export erfolgreich"
-  success_message: "{count} Buch/Bücher exportiert nach:\n{path}"
-  error_title: "Exportfehler"
-  error_message: "Daten können nicht exportiert werden:\n{error}"
-  metadata:
-    date: "Exportiert am"
-    count: "Anzahl der Datensätze"
-  progress:
-    message: "Export läuft..."
-  cancel: "Abbrechen"
-  not_available_title: "Export nicht verfügbar"
-  not_available_body: "Export ist für diese Ansicht nicht verfügbar."
-  not_available_loans: "Ausleihen-Export wird in Kürze verfügbar sein."
-  split_choice_title: "Ansicht zum Exportieren wählen"
-  split_choice_body: "Möchten Sie Bücher (Ja) oder Mitglieder (Nein) exportieren?"
-  split_button_books: "Bücher"
-  split_button_members: "Mitglieder"
-  split_button_cancel: "Abbrechen"
-
-about:
-  description_title: "Beschreibung"
-  description_text: "Wie die Morgenröte die Dunkelheit vertreibt, bewahrt und teilt Aurora das Licht des Wissens. Moderne Bibliothekssammlungs-Verwaltungsanwendung, entworfen im Geiste der großen humanistischen Bibliotheken."
-  author_title: "Entwicklung"
-  author_label: "Autor"
-  license_title: "Lizenz"
-  license_text: "Diese Software wird unter {license} Lizenz vertrieben."
-  website_label: "Webseite"
-  email_label: "Kontakt"
-  source_request: "Quellcode auf Anfrage verfügbar unter contact@6f4.be"
-  title: "Über"
-  body: "Aurora ist eine Bibliotheksverwaltungsanwendung."
 
 overdue_alert:
   title: "⚠️ Überfällige Ausleihen"

@@ -7,11 +7,15 @@ permettant de renseigner toutes les informations d'un livre. Il inclut
 
 from __future__ import annotations
 
+import uuid
+from pathlib import Path
 from typing import Any
 
+from PySide6.QtCore import Qt
+from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import (
-    QComboBox,
     QDialog,
+    QFileDialog,
     QHBoxLayout,
     QLabel,
     QLineEdit,
@@ -24,9 +28,10 @@ from PySide6.QtWidgets import (
 )
 
 from ..persistence.database import get_session
-from ..persistence.models_sa import Book, BookCategory
+from ..persistence.models_sa import Book
 from ..services.bnf_adapter import BnfAdapter
 from ..services.translation_service import translate
+from ..utils.paths import user_covers_dir, user_data_dir
 from .bnf_select_dialog import BnfNotice, BnfSelectDialog
 
 
@@ -116,16 +121,43 @@ class BookEditor(QDialog):
         self.sp_avail.setValue(1)
         create_form_row(translate("book_editor.label_copies_available"), self.sp_avail)
 
-        self.cb_category = QComboBox()
-        for c in BookCategory:
-            self.cb_category.addItem(c.value, c)
-        create_form_row(translate("book_editor.label_category"), self.cb_category)
-
         # 🆕 NOUVEAU : Champ résumé (QTextEdit multiligne)
         self.ed_summary = QTextEdit()
         self.ed_summary.setPlaceholderText(translate("book_editor.summary_placeholder"))
         self.ed_summary.setMaximumHeight(100)  # Limite la hauteur (environ 4-5 lignes)
         create_form_row(translate("book_editor.label_summary"), self.ed_summary)
+
+        # === COUVERTURE ===
+        # Container horizontal pour preview + boutons
+        cover_widget = QWidget()
+        cover_hlayout = QHBoxLayout(cover_widget)
+        cover_hlayout.setContentsMargins(0, 0, 0, 0)
+
+        # Miniature preview
+        self.cover_preview = QLabel()
+        self.cover_preview.setFixedSize(64, 64)
+        self.cover_preview.setAlignment(Qt.AlignCenter)
+        self.cover_preview.setStyleSheet("border: 1px solid #ccc; background-color: #f0f0f0;")
+        self.cover_preview.setText("📚")
+        cover_hlayout.addWidget(self.cover_preview)
+
+        # Boutons
+        self.btn_add_cover = QPushButton(translate("book_editor.cover_add_button"))
+        self.btn_add_cover.clicked.connect(self._on_add_cover)
+        cover_hlayout.addWidget(self.btn_add_cover)
+
+        self.btn_remove_cover = QPushButton(translate("book_editor.cover_remove_button"))
+        self.btn_remove_cover.clicked.connect(self._on_remove_cover)
+        self.btn_remove_cover.setEnabled(False)
+        cover_hlayout.addWidget(self.btn_remove_cover)
+
+        cover_hlayout.addStretch()
+
+        # Ajoute au formulaire en utilisant create_form_row
+        create_form_row(translate("book_editor.cover_label"), cover_widget)
+
+        # Variable pour stocker le chemin
+        self.current_cover_path: str | None = None
 
         # --- Pré-remplissage si édition ---
         if book:
@@ -165,6 +197,12 @@ class BookEditor(QDialog):
 
         # 🆕 NOUVEAU : Chargement du résumé
         self.ed_summary.setPlainText(getattr(book, "summary", "") or "")
+
+        # Charge couverture si présente
+        self.current_cover_path = getattr(book, "cover_image", None)
+        self._update_cover_preview()
+        if self.current_cover_path:
+            self.btn_remove_cover.setEnabled(True)
 
         # Sélectionne la bonne catégorie dans la ComboBox
         category_to_select = getattr(book, "category", None)
@@ -207,8 +245,8 @@ class BookEditor(QDialog):
             "collection": self.ed_fund.text().strip() or None,
             "copies_total": total,
             "copies_available": avail,
-            "category": self.cb_category.currentData(),
-            "summary": self.ed_summary.toPlainText().strip() or None,  # 🆕 NOUVEAU
+            "summary": self.ed_summary.toPlainText().strip() or None,
+            "cover_image": self.current_cover_path,
         }
 
         with get_session() as session:
@@ -299,3 +337,105 @@ class BookEditor(QDialog):
                 translate("bnf_search.error_title"),
                 translate("bnf_search.error_message").format(error=str(e)),
             )
+
+    def _on_add_cover(self) -> None:
+        """Ouvre dialogue pour sélectionner une image de couverture."""
+        file_path, _ = QFileDialog.getOpenFileName(
+            self,
+            translate("book_editor.cover_dialog_title"),
+            "",
+            translate("book_editor.cover_dialog_filter"),
+        )
+
+        if not file_path:
+            return  # Annulé
+
+        source_path = Path(file_path)
+
+        # Génère nom unique : {book_id}_{uuid}.ext
+        book_id = self._book.id if self._book and self._book.id else "new"
+        unique_name = f"{book_id}_{uuid.uuid4().hex[:8]}{source_path.suffix.lower()}"
+        dest_path = user_covers_dir() / unique_name
+
+        try:
+            # Redimensionne et sauvegarde
+            self._resize_and_save_cover(source_path, dest_path)
+
+            # Stocke chemin relatif
+            self.current_cover_path = f"covers/{unique_name}"
+
+            # Met à jour preview
+            self._update_cover_preview()
+
+            # Active bouton suppression
+            self.btn_remove_cover.setEnabled(True)
+
+        except Exception as e:
+            QMessageBox.warning(self, "Erreur", f"Impossible d'ajouter la couverture : {e}")
+
+    def _on_remove_cover(self) -> None:
+        """Supprime la couverture actuelle."""
+        if not self.current_cover_path:
+            return
+
+        # Supprime fichier physique
+        cover_full_path = user_data_dir() / self.current_cover_path
+        if cover_full_path.exists():
+            cover_full_path.unlink()
+
+        # Réinitialise
+        self.current_cover_path = None
+        self.cover_preview.clear()
+        self.cover_preview.setText("📚")
+        self.btn_remove_cover.setEnabled(False)
+
+    def _resize_and_save_cover(self, source: Path, dest: Path, max_size: int = 800) -> None:
+        """Redimensionne l'image si trop grande et sauvegarde.
+
+        Args:
+            source: Chemin de l'image source
+            dest: Chemin de destination
+            max_size: Taille maximale en pixels (largeur ou hauteur)
+        """
+        try:
+            from PIL import Image
+        except ImportError:
+            # Si Pillow pas installé, copie sans redimensionner
+            import shutil
+
+            shutil.copy(source, dest)
+            return
+
+        img = Image.open(source)
+
+        # Redimensionne si nécessaire
+        if max(img.size) > max_size:
+            img.thumbnail((max_size, max_size), Image.Resampling.LANCZOS)
+
+        # Convertit en RGB si nécessaire (pour JPEG)
+        if img.mode in ("RGBA", "P"):
+            img = img.convert("RGB")
+
+        # Sauvegarde optimisée
+        img.save(dest, optimize=True, quality=85)
+
+    def _update_cover_preview(self) -> None:
+        """Met à jour la miniature de prévisualisation."""
+        if not self.current_cover_path:
+            self.cover_preview.clear()
+            self.cover_preview.setText("📚")
+            return
+
+        cover_full_path = user_data_dir() / self.current_cover_path
+        if not cover_full_path.exists():
+            self.cover_preview.setText("❌")
+            return
+
+        pixmap = QPixmap(str(cover_full_path))
+        if pixmap.isNull():
+            self.cover_preview.setText("❌")
+            return
+
+        # Redimensionne pour preview 64x64
+        scaled_pixmap = pixmap.scaled(64, 64, Qt.KeepAspectRatio, Qt.SmoothTransformation)
+        self.cover_preview.setPixmap(scaled_pixmap)

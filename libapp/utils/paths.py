@@ -68,3 +68,14 @@ def logs_path() -> Path:
     p = user_data_dir() / "logs"
     p.mkdir(parents=True, exist_ok=True)
     return p
+
+
+def user_covers_dir() -> Path:
+    """Retourne le dossier de stockage des couvertures de livres.
+
+    Returns:
+        Path: Chemin vers le dossier covers/ (créé automatiquement si inexistant)
+    """
+    covers_dir = user_data_dir() / "covers"
+    covers_dir.mkdir(parents=True, exist_ok=True)
+    return covers_dir
