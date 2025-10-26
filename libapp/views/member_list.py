@@ -94,8 +94,7 @@ class MemberTableModel(QAbstractTableModel):
             3: member.first_name,
             4: member.email,
             5: member.phone,
-            6: member.status.value if member.status else "",
-            7: translate("member.is_active_status")
+            6: translate("member.is_active_status")
             if member.is_active
             else translate("member.is_nonactive_status"),
         }
@@ -483,8 +482,6 @@ class MemberListView(QWidget):
             return member.email or ""
         elif col_id == "phone":
             return member.phone or ""
-        elif col_id == "status":
-            return member.status.value if member.status else ""
         elif col_id == "is_active":
             return (
                 translate("member.is_active_status")

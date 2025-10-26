@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Outer cover -->
+    <rect x="24" y="32" width="208" height="192" rx="16" ry="16"/>
+    <!-- Center fold -->
+    <line x1="128" y1="40" x2="128" y2="224"/>
+    <!-- Minimal bookmark -->
+    <path d="M168 144v48l16-12 16 12v-48"/>
+  </g>
+</svg>

@@ -302,3 +302,26 @@ import_members_dialog:
   policy_label: "Als lid al bestaat:"
   policy_skip: "Overslaan"
   policy_update: "Bijwerken"
+
+book_details:
+  select_book: "Selecteer een boek"
+  no_selection: "Geen boek geselecteerd"
+  no_cover: "Geen omslag"
+  author: "Auteur"
+  year: "Jaar"
+  publisher: "Uitgever"
+  isbn: "ISBN"
+  summary: "Samenvatting"
+  no_summary: "Geen samenvatting beschikbaar"
+
+member_details:
+  select_member: "Selecteer een lid"
+  no_selection: "Geen lid geselecteerd"
+  no_photo: "Geen foto"
+  member_no: "Lidnummer"
+  email: "Email"
+  phone: "Telefoon"
+  active_status: "Actieve status"
+  active: "Actief"
+  inactive: "Inactief"
+  date_joined: "Datum van toetreding"

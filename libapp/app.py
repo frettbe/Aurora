@@ -11,7 +11,7 @@ import logging
 import sys
 
 import qdarktheme
-from PySide6.QtCore import QCoreApplication, Qt, QUrl, Signal, Slot
+from PySide6.QtCore import QByteArray, QCoreApplication, Qt, QUrl, Signal, Slot
 from PySide6.QtGui import QAction, QCloseEvent, QDesktopServices, QKeySequence
 from PySide6.QtWidgets import (
     QApplication,
@@ -30,6 +30,7 @@ from .services.preferences import load_preferences, save_preferences
 from .services.translation_service import set_language, translate
 from .utils.icon_helper import app_icon, toolbar_icon
 from .views.about_dialog import AboutDialog
+from .views.book_details_panel import BookDetailsPanel
 from .views.book_editor import BookEditor
 from .views.book_list import BookListView
 from .views.dashboard import DashboardView
@@ -38,6 +39,7 @@ from .views.import_members_dialog import ImportMembersDialog
 from .views.loan_dialog import LoanDialog
 from .views.loan_dialogs import ReturnLoanDialog
 from .views.loan_list import LoanListView
+from .views.member_details_panel import MemberDetailsPanel
 from .views.member_editor import MemberEditor
 from .views.member_list import MemberListView
 from .views.preferences_dialog import PreferencesDialog
@@ -275,19 +277,19 @@ class MainWindow(QMainWindow):
         self.act_show_split.triggered.connect(self.show_split_view)
 
     def _create_main_widgets(self):
-        """Crée et configure le widget central (QStackedWidget)."""
+        """Crée et configure le widget central avec splitter pour détails."""
+        # Stack principal (vues liste/dashboard)
         self.stack = QStackedWidget(self)
-        self.setCentralWidget(self.stack)
 
         self.dashboard_view = DashboardView(parent=self)
         self.book_list_view = BookListView(parent=self, prefs=self.prefs)
         self.member_list_view = MemberListView(parent=self, prefs=self.prefs)
         self.loan_list_view = LoanListView(parent=self, prefs=self.prefs)
-        self.splitter = QSplitter(Qt.Orientation.Horizontal)
 
+        # Splitter mode split view (code existant à garder)
+        self.splitter = QSplitter(Qt.Orientation.Horizontal)
         self.book_list_split = BookListView(parent=self.splitter, prefs=self.prefs)
         self.member_list_split = MemberListView(parent=self.splitter, prefs=self.prefs)
-
         self.splitter.addWidget(self.book_list_split)
         self.splitter.addWidget(self.member_list_split)
         self.splitter.setChildrenCollapsible(False)
@@ -297,6 +299,24 @@ class MainWindow(QMainWindow):
         self.stack.addWidget(self.member_list_view)
         self.stack.addWidget(self.loan_list_view)
         self.stack.addWidget(self.splitter)
+
+        # 🎯 NOUVEAU : Stack pour panneaux détails
+        self.details_stack = QStackedWidget(self)
+        self.book_details_panel = BookDetailsPanel(self)
+        self.member_details_panel = MemberDetailsPanel(self)
+
+        self.details_stack.addWidget(self.book_details_panel)
+        self.details_stack.addWidget(self.member_details_panel)
+
+        # 🎯 NOUVEAU : Splitter horizontal global (vues principales + détails)
+        self.main_splitter = QSplitter(Qt.Orientation.Horizontal, self)
+        self.main_splitter.addWidget(self.stack)
+        self.main_splitter.addWidget(self.details_stack)
+        self.main_splitter.setStretchFactor(0, 2)  # Stack principal = 2/3
+        self.main_splitter.setStretchFactor(1, 1)  # Détails = 1/3
+        self.main_splitter.setChildrenCollapsible(False)
+
+        self.setCentralWidget(self.main_splitter)  # ← Changé de self.stack à self.main_splitter
 
     def _create_menus(self):
         """Crée la barre de menus."""
@@ -359,20 +379,26 @@ class MainWindow(QMainWindow):
 
     def _connect_signals(self):
         """Connecte tous les signaux de l'application."""
-
         # Signaux des vues
         self.dataChanged.connect(self.refresh_all_views)
+        self.stack.currentChanged.connect(self._on_view_changed)
 
         # Vues principales
         self.book_list_view.bookActivated.connect(self.edit_book_by_id)
         self.member_list_view.memberActivated.connect(self.edit_member_by_id)
         self.loan_list_view.loanActivated.connect(self.return_loan_by_id)
 
-        # 🔥 Vues de la split view (mêmes signaux)
+        # 🔥 Vues de la split view
         self.book_list_split.bookActivated.connect(self.edit_book_by_id)
         self.member_list_split.memberActivated.connect(self.edit_member_by_id)
         self.dashboard_view.showMembersRequested.connect(self.show_member_list)
         self.dashboard_view.filterLoansRequested.connect(self._on_filter_loans_from_dashboard)
+
+        # 🎯 IMPORTANT : Connecter les sélections APRÈS que les vues soient chargées
+        # On utilise QTimer pour différer la connexion
+        from PySide6.QtCore import QTimer
+
+        QTimer.singleShot(100, self._connect_selection_signals)
 
     def _restore_state(self):
         """Restaure la géométrie de la fenêtre et la vue de démarrage."""
@@ -383,7 +409,7 @@ class MainWindow(QMainWindow):
         ):
             self.restoreGeometry(self.prefs.main_window_geometry)
 
-        # Application de la vue de démarrage
+        # Application de la vue de démarrage D'ABORD
         startup_view = self.prefs.startup_view
         if startup_view == "dashboard":
             self.show_dashboard()
@@ -398,6 +424,11 @@ class MainWindow(QMainWindow):
         else:
             # Fallback par défaut
             self.show_book_list()
+
+        # 🎯 DÉPLACÉ ICI : Restaurer l'état du splitter APRÈS le chargement des vues
+        if hasattr(self.prefs, "main_splitter_state") and self.prefs.main_splitter_state:
+            splitter_bytes = QByteArray.fromBase64(self.prefs.main_splitter_state.encode())
+            self.main_splitter.restoreState(splitter_bytes)
 
     # --- SLOTS ET MÉTHODES PUBLIQUES RESTAURÉS ---
 
@@ -417,27 +448,35 @@ class MainWindow(QMainWindow):
 
     def show_dashboard(self):
         self.stack.setCurrentWidget(self.dashboard_view)
+        self.main_splitter.widget(1).hide()
         self.dashboard_view.refresh()
         self._save_current_view("dashboard")
 
     def show_book_list(self):
         self.stack.setCurrentWidget(self.book_list_view)
+        self.main_splitter.widget(1).show()
+        self.details_stack.setCurrentWidget(self.book_details_panel)
         self.book_list_view.refresh()
         self._save_current_view("books")
 
     def show_member_list(self):
         self.stack.setCurrentWidget(self.member_list_view)
+        self.main_splitter.widget(1).show()
+        self.details_stack.setCurrentWidget(self.book_details_panel)
         self.member_list_view.refresh()
         self._save_current_view("members")
 
     def show_loan_list(self):
         self.stack.setCurrentWidget(self.loan_list_view)
+        self.main_splitter.widget(1).hide()  # widget(1) = details_stack
         self.loan_list_view.refresh()
         self._save_current_view("loans")
 
     def show_split_view(self):
         """Affiche la vue splitée Books + Members."""
         self.stack.setCurrentWidget(self.splitter)
+        self.main_splitter.widget(1).show()
+        self.details_stack.setCurrentWidget(self.book_details_panel)
         self.book_list_split.refresh()
         self.member_list_split.refresh()
         self._save_current_view("split")
@@ -600,8 +639,14 @@ class MainWindow(QMainWindow):
         self.book_list_view.save_view_state()
         self.member_list_view.save_view_state()
         self.loan_list_view.save_view_state()
+
+        # Sauvegarder état du splitter
+        splitter_state = self.main_splitter.saveState().toBase64().data().decode()
+        self.prefs.main_splitter_state = splitter_state
+
         if self.prefs.remember_window_geometry:
             self.prefs.main_window_geometry = self.saveGeometry()
+
         save_preferences(self.prefs)
         super().closeEvent(event)
 
@@ -735,6 +780,133 @@ class MainWindow(QMainWindow):
         elif clicked == btn_members:
             self.member_list_split._on_export()
         # Si cancel ou fermeture, on ne fait rien
+
+    @Slot(int)
+    def _on_view_changed(self, index: int) -> None:
+        """Adapte le panneau détails selon la vue active.
+
+        Args:
+            index: Index de la vue active dans self.stack.
+        """
+        # Index: 0=Dashboard, 1=Books, 2=Members, 3=Loans, 4=Split
+        if index == 1:  # Vue Livres
+            self.details_stack.setCurrentWidget(self.book_details_panel)
+            self.book_details_panel.clear()
+        elif index == 2:  # Vue Membres
+            self.details_stack.setCurrentWidget(self.member_details_panel)
+            self.member_details_panel.clear()
+
+    @Slot(Member)
+    def _on_member_row_selected(self, member: Member) -> None:
+        """Met à jour le panneau détails quand un membre est sélectionné."""
+        if member:
+            self.member_details_panel.update_from_member(member)
+
+    def _connect_selection_signals(self):
+        """Connecte les signaux de sélection après chargement des vues."""
+        try:
+            # Vues simples (déjà connectées)
+            self.book_list_view.table_view.selectionModel().selectionChanged.connect(
+                self._on_book_selection_changed
+            )
+            self.member_list_view.table_view.selectionModel().selectionChanged.connect(
+                self._on_member_selection_changed
+            )
+
+            self.book_list_split.table_view.selectionModel().selectionChanged.connect(
+                self._on_book_split_selection_changed
+            )
+            self.member_list_split.table_view.selectionModel().selectionChanged.connect(
+                self._on_member_split_selection_changed
+            )
+
+            print("✅ Signaux de sélection connectés avec succès (vues simples + split)")
+        except Exception as e:
+            print(f"❌ Erreur connexion signaux: {e}")
+
+    @Slot()
+    def _on_book_selection_changed(self) -> None:
+        """Met à jour le panneau détails quand un livre est sélectionné."""
+
+        selected_rows = self.book_list_view.table_view.selectionModel().selectedRows()
+
+        if not selected_rows:
+            self.book_details_panel.clear()
+            return
+
+        # Mapper vers le modèle source (en cas de proxy)
+        proxy_index = selected_rows[0]
+        source_index = self.book_list_view.proxy_model.mapToSource(proxy_index)
+
+        # Récupérer le livre
+        book = self.book_list_view.table_model.get_book_by_row(source_index.row())
+
+        if book:
+            self.book_details_panel.update_from_book(book)
+
+    @Slot()
+    def _on_member_selection_changed(self) -> None:
+        """Met à jour le panneau détails quand un membre est sélectionné."""
+
+        selected_rows = self.member_list_view.table_view.selectionModel().selectedRows()
+
+        if not selected_rows:
+            self.member_details_panel.clear()
+            return
+
+        # Mapper vers le modèle source (en cas de proxy)
+        proxy_index = selected_rows[0]
+        source_index = self.member_list_view.proxy_model.mapToSource(proxy_index)
+
+        # Récupérer le membre
+        member = self.member_list_view.table_model.get_member_by_row(source_index.row())
+
+        if member:
+            self.member_details_panel.update_from_member(member)
+
+    @Slot()
+    def _on_book_split_selection_changed(self) -> None:
+        """Met à jour le panneau détails quand un livre est sélectionné dans la split view."""
+        # 🎯 NOUVEAU : Basculer vers le panneau livres
+        self.details_stack.setCurrentWidget(self.book_details_panel)
+
+        selected_rows = self.book_list_split.table_view.selectionModel().selectedRows()
+
+        if not selected_rows:
+            self.book_details_panel.clear()
+            return
+
+        # Mapper vers le modèle source
+        proxy_index = selected_rows[0]
+        source_index = self.book_list_split.proxy_model.mapToSource(proxy_index)
+
+        # Récupérer le livre
+        book = self.book_list_split.table_model.get_book_by_row(source_index.row())
+
+        if book:
+            self.book_details_panel.update_from_book(book)
+
+    @Slot()
+    def _on_member_split_selection_changed(self) -> None:
+        """Met à jour le panneau détails quand un membre est sélectionné dans la split view."""
+        # 🎯 NOUVEAU : Basculer vers le panneau membres
+        self.details_stack.setCurrentWidget(self.member_details_panel)
+
+        selected_rows = self.member_list_split.table_view.selectionModel().selectedRows()
+
+        if not selected_rows:
+            self.member_details_panel.clear()
+            return
+
+        # Mapper vers le modèle source
+        proxy_index = selected_rows[0]
+        source_index = self.member_list_split.proxy_model.mapToSource(proxy_index)
+
+        # Récupérer le membre
+        member = self.member_list_split.table_model.get_member_by_row(source_index.row())
+
+        if member:
+            self.member_details_panel.update_from_member(member)
 
 
 def main():

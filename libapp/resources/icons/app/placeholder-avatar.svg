@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <g fill="none" stroke="currentColor" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Head -->
+    <circle cx="128" cy="84" r="40"/>
+    <!-- Shoulders / bust -->
+    <path d="M56 204c0-40 32-72 72-72s72 32 72 72"/>
+  </g>
+</svg>

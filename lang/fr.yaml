@@ -382,3 +382,26 @@ import_members_dialog:
   policy_label: "Si membre existe déjà :"
   policy_skip: "Ignorer"
   policy_update: "Mettre à jour"
+
+book_details:
+  select_book: "Sélectionnez un livre"
+  no_selection: "Aucun livre sélectionné"
+  no_cover: "Pas de couverture"
+  author: "Auteur"
+  year: "Année"
+  publisher: "Éditeur"
+  isbn: "ISBN"
+  summary: "Résumé"
+  no_summary: "Aucun résumé disponible"
+
+member_details:
+  select_member: "Sélectionnez un membre"
+  no_selection: "Aucun membre sélectionné"
+  no_photo: "Pas de photo"
+  member_no: "Numéro de membre"
+  email: "Email"
+  phone: "Téléphone"
+  active_status: "Statut actif"
+  active: "Actif"
+  inactive: "Inactif"
+  date_joined: "Date d'adhésion"

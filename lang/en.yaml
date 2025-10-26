@@ -300,3 +300,26 @@ import_members_dialog:
   policy_label: "If member already exists:"
   policy_skip: "Skip"
   policy_update: "Update"
+
+book_details:
+  select_book: "Select a book"
+  no_selection: "No book selected"
+  no_cover: "No cover"
+  author: "Author"
+  year: "Year"
+  publisher: "Publisher"
+  isbn: "ISBN"
+  summary: "Summary"
+  no_summary: "No summary available"
+
+member_details:
+  select_member: "Select a member"
+  no_selection: "No member selected"
+  no_photo: "No photo"
+  member_no: "Member number"
+  email: "Email"
+  phone: "Phone"
+  active_status: "Active status"
+  active: "Active"
+  inactive: "Inactive"
+  date_joined: "Join date"

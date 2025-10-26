@@ -12,7 +12,6 @@ from typing import Any
 
 from PySide6.QtWidgets import (
     QCheckBox,
-    QComboBox,
     QDialog,
     QDialogButtonBox,
     QFormLayout,
@@ -58,10 +57,10 @@ class MemberEditor(QDialog):
         self.last_name_input = QLineEdit()
         self.email_input = QLineEdit()
         self.phone_input = QLineEdit()
-        self.member_status_input = QComboBox()
-        self.member_status_input.addItem(translate("member.status_apprenti"), "apprenti")
-        self.member_status_input.addItem(translate("member.status_compagnon"), "compagnon")
-        self.member_status_input.addItem(translate("member.status_maitre"), "maitre")
+        # self.member_status_input = QComboBox()
+        # self.member_status_input.addItem(translate("member.status_apprenti"), "apprenti")
+        # self.member_status_input.addItem(translate("member.status_compagnon"), "compagnon")
+        # self.member_status_input.addItem(translate("member.status_maitre"), "maitre")
         self.active_input = QCheckBox(translate("member.is_active"))
 
         form_layout.addRow(translate("member.member_no"), self.member_no_input)
@@ -69,7 +68,6 @@ class MemberEditor(QDialog):
         form_layout.addRow(translate("member.last_name"), self.last_name_input)
         form_layout.addRow(translate("member.email"), self.email_input)
         form_layout.addRow(translate("member.phone"), self.phone_input)
-        form_layout.addRow(translate("member.status"), self.member_status_input)
         form_layout.addRow(translate("member.is_active_label"), self.active_input)
         main_layout.addLayout(form_layout)
 
@@ -95,11 +93,6 @@ class MemberEditor(QDialog):
         self.last_name_input.setText(self._member.last_name)
         self.email_input.setText(self._member.email)
         self.phone_input.setText(self._member.phone or "")
-        status_value = self._member.status.value
-        status_value = self._member.status.value
-        index = self.member_status_input.findData(status_value)
-        if index >= 0:
-            self.member_status_input.setCurrentIndex(index)
         self.active_input.setChecked(self._member.is_active)
 
     def accept(self):
@@ -154,7 +147,6 @@ class MemberEditor(QDialog):
                 member.first_name = self.first_name_input.text().strip()
                 member.email = self.email_input.text().strip() or None
                 member.phone = self.phone_input.text().strip() or None
-                member.status = self.member_status_input.currentData()
                 member.is_active = self.active_input.isChecked()
 
                 session.commit()
