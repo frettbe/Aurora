@@ -4,6 +4,8 @@ Vue principale affichant la liste des membres de la bibliothèque.
 
 from __future__ import annotations
 
+import logging
+
 from PySide6.QtCore import QAbstractTableModel, QByteArray, QModelIndex, Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QDialog,
@@ -26,10 +28,12 @@ from ..services.audit_service import (
     audit_member_updated,
 )
 from ..services.export_service import ExportMetadata, export_data
-from ..services.preferences import Preferences, save_preferences
+from ..services.preferences import Preferences
 from ..services.translation_service import translate
 from .export_dialog import ExportDialog
 from .natural_sort_proxy import NaturalSortProxyModel
+
+logger = logging.getLogger(__name__)
 
 
 class MemberTableModel(QAbstractTableModel):
@@ -172,7 +176,6 @@ class MemberListView(QWidget):
             .decode("ascii"),
         }
         self._prefs.members_view_state = state
-        save_preferences(self._prefs)
 
     @Slot()
     def refresh(self):
@@ -191,16 +194,6 @@ class MemberListView(QWidget):
         # Maintenant la session est fermée, mais les objets sont accessibles
         self.table_model.set_members(members)
         self._on_filter_changed()
-        # Auto-resize des colonnes
-        self.table_view.resizeColumnsToContents()
-
-        # Ajouter un minimum pour lisibilité
-        for col in range(self.table_view.model().columnCount()):
-            width = self.table_view.columnWidth(col)
-            self.table_view.setColumnWidth(col, max(width, 80))
-
-        # Étendre la dernière colonne
-        self.table_view.horizontalHeader().setStretchLastSection(True)
 
     @Slot()
     def _on_filter_changed(self):

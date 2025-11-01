@@ -6,6 +6,8 @@ Vue principale affichant la liste des livres de la bibliothèque.
 
 from __future__ import annotations
 
+import logging
+
 from PySide6.QtCore import QAbstractTableModel, QByteArray, QModelIndex, Qt, Signal, Slot
 from PySide6.QtWidgets import (
     QApplication,
@@ -27,10 +29,12 @@ from ..persistence.models_sa import Book
 from ..services.audit_service import audit_book_created, audit_book_deleted, audit_book_updated
 from ..services.export_service import ExportMetadata, export_data
 from ..services.meta_search_service import BestResultStrategy, MetaSearchService
-from ..services.preferences import Preferences, save_preferences
+from ..services.preferences import Preferences
 from ..services.translation_service import translate
 from .export_dialog import ExportDialog
 from .natural_sort_proxy import NaturalSortProxyModel
+
+logger = logging.getLogger(__name__)
 
 
 class BookTableModel(QAbstractTableModel):
@@ -62,6 +66,7 @@ class BookTableModel(QAbstractTableModel):
         self._visible_columns = visible_columns
 
         # Headers affichés basés sur les colonnes visibles
+        self._visible_columns = [col for col in self._visible_columns if col in self.ALL_COLUMNS]
         self._column_headers = [self.ALL_COLUMNS[col] for col in self._visible_columns]
 
     def set_books(self, books: list[Book]):
@@ -131,9 +136,6 @@ class BookTableModel(QAbstractTableModel):
                 return f"{book.copies_available}/{book.copies_total}"
             elif col_name == "summary":
                 return (book.summary or "")[:50] + ("..." if len(book.summary or "") > 50 else "")
-            elif col_name == "cover_image":
-                # Pas d'affichage texte pour les images
-                return ""
 
         elif role == Qt.ItemDataRole.DecorationRole:
             # Affichage des icônes/images dans les cellules
@@ -238,7 +240,6 @@ class BookListView(QWidget):
             .decode("ascii"),
         }
         self._prefs.books_view_state = state
-        save_preferences(self._prefs)
 
     @Slot()
     def refresh(self):
@@ -254,17 +255,16 @@ class BookListView(QWidget):
 
         # Maintenant la session est fermée, mais les objets sont accessibles
         self.table_model.set_books(books)
+        if self._prefs.books_view_state and "header_state" in self._prefs.books_view_state:
+            try:
+                header_state = QByteArray.fromBase64(
+                    self._prefs.books_view_state["header_state"].encode("ascii")
+                )
+                self.table_view.horizontalHeader().restoreState(header_state)
+                logger.info("[refresh] État header restauré depuis prefs")
+            except Exception as e:
+                logger.warning(f"[refresh] Impossible restaurer header state: {e}")
         self._on_filter_changed()
-        # Auto-resize des colonnes
-        self.table_view.resizeColumnsToContents()
-
-        # Ajouter un minimum pour lisibilité
-        for col in range(self.table_view.model().columnCount()):
-            width = self.table_view.columnWidth(col)
-            self.table_view.setColumnWidth(col, max(width, 80))
-
-        # Étendre la dernière colonne
-        self.table_view.horizontalHeader().setStretchLastSection(True)
 
     @Slot()
     def _on_filter_changed(self):
@@ -863,7 +863,6 @@ class BookListView(QWidget):
 
             self._prefs.export_last_format = selected_format
             self._prefs.export_last_columns_books = selected_columns
-            save_preferences(self._prefs)
 
             # 11. Confirmer le succès
             QMessageBox.information(

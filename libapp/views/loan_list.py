@@ -41,7 +41,7 @@ from ..persistence.database import get_session
 from ..persistence.models_sa import Loan, LoanStatus
 from ..services.export_service import ExportMetadata, export_data
 from ..services.loan_service import is_overdue
-from ..services.preferences import Preferences, save_preferences
+from ..services.preferences import Preferences
 from ..services.translation_service import translate
 from .export_dialog import ExportDialog
 from .loan_dialogs import ReturnLoanDialog
@@ -204,7 +204,6 @@ class LoanListView(QWidget):
             .decode("ascii"),
         }
         self._prefs.loans_view_state = state
-        save_preferences(self._prefs)
 
     def get_selected_loan_id(self) -> int | None:
         sel = self.table_view.selectionModel()

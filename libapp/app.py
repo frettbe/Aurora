@@ -485,7 +485,6 @@ class MainWindow(QMainWindow):
         """Sauvegarde la vue active dans les préférences."""
         if self.prefs.startup_view != view_name:
             self.prefs.startup_view = view_name
-            save_preferences(self.prefs)
 
     @Slot()
     def add_book(self):
@@ -635,19 +634,37 @@ class MainWindow(QMainWindow):
         QDesktopServices.openUrl(url)
 
     def closeEvent(self, event: QCloseEvent):
-        """Sauvegarde l'état de la fenêtre avant de quitter."""
-        self.book_list_view.save_view_state()
-        self.member_list_view.save_view_state()
-        self.loan_list_view.save_view_state()
+        """Centralise TOUTES les sauvegardes avant fermeture."""
+        try:
+            logger.info("[closeEvent] Fermeture application...")
 
-        # Sauvegarder état du splitter
-        splitter_state = self.main_splitter.saveState().toBase64().data().decode()
-        self.prefs.main_splitter_state = splitter_state
+            # ⬇️ CENTRALISER LES SAUVEGARDES D'ÉTAT
+            # 1. Sauvegarder l'état des vues
+            if hasattr(self, "book_list_view"):
+                self.book_list_view.save_view_state()
+            if hasattr(self, "member_list_view"):
+                self.member_list_view.save_view_state()
+            if hasattr(self, "loan_list_view"):
+                self.loan_list_view.save_view_state()
 
-        if self.prefs.remember_window_geometry:
-            self.prefs.main_window_geometry = self.saveGeometry()
+            # 2. Sauvegarder splitter state
+            if hasattr(self, "main_splitter"):
+                splitter_state = self.main_splitter.saveState().toBase64().data().decode()
+                self.prefs.main_splitter_state = splitter_state
 
-        save_preferences(self.prefs)
+            # 3. Sauvegarder géométrie fenêtre
+            if self.prefs.remember_window_geometry:
+                self.prefs.main_window_geometry = self.saveGeometry()
+
+            # ⬇️ UN SEUL APPEL save_preferences() À LA FIN
+            save_preferences(self.prefs)
+            logger.info("[closeEvent] Préférences sauvegardées")
+
+        except Exception as e:
+            logger.error(f"[closeEvent] Erreur sauvegarde: {e}")
+            # Continuer même si erreur
+
+        # Fermer l'application
         super().closeEvent(event)
 
     @Slot()

@@ -1,4 +1,5 @@
-"""Boîte de dialogue pour la configuration des préférences de l'application.
+"""
+Boîte de dialogue pour la configuration des préférences de l'application.
 
 Ce module définit `PreferencesDialog`, une fenêtre modale qui permet à
 l'utilisateur de modifier divers paramètres de l'application, tels que la
@@ -7,6 +8,7 @@ langue, la vue de démarrage, et d'autres options de comportement.
 
 from __future__ import annotations
 
+import logging
 from pathlib import Path
 
 from PySide6.QtCore import Slot
@@ -24,12 +26,15 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..services.preferences import Preferences
+from ..services.preferences import Preferences, save_preferences
 from ..services.translation_service import translate
+
+logger = logging.getLogger(__name__)
 
 
 class PreferencesDialog(QDialog):
-    """Fenêtre modale pour l'édition des préférences utilisateur.
+    """
+    Fenêtre modale pour l'édition des préférences utilisateur.
 
     Elle est initialisée avec un objet `Preferences` existant. Si l'utilisateur
     valide, un nouvel objet `Preferences` mis à jour est stocké dans l'attribut
@@ -72,11 +77,11 @@ class PreferencesDialog(QDialog):
 
         # Thème
         self.theme_combo = QComboBox(self)
-        appearance_form.addRow(f"{translate('preferences.theme')}:", self.theme_combo)
+        appearance_form.addRow(f"<b>{translate('preferences.theme')}:</b>", self.theme_combo)
 
         # Langue
         self.language_combo = QComboBox(self)
-        appearance_form.addRow(f"{translate('preferences.language')}:", self.language_combo)
+        appearance_form.addRow(f"<b>{translate('preferences.language')}:</b>", self.language_combo)
 
         main_layout.addLayout(appearance_form)
 
@@ -97,8 +102,9 @@ class PreferencesDialog(QDialog):
 
         # Vue au démarrage
         self.startup_view_combo = QComboBox(self)
-        interface_form.addRow(f"{translate('preferences.startup_view')}:", self.startup_view_combo)
-
+        interface_form.addRow(
+            f"<b>{translate('preferences.startup_view')}:</b>", self.startup_view_combo
+        )
         # Mémoriser géométrie
         self.remember_geometry_checkbox = QCheckBox()
         self.remember_geometry_checkbox.setText(translate("preferences.remember_geometry_label"))
@@ -290,7 +296,17 @@ class PreferencesDialog(QDialog):
                 translate("preferences.language_changed_body"),
             )
 
-        self.accept()
+        try:
+            # Sauvegarder IMMÉDIATEMENT (feedback utilisateur)
+            save_preferences(self.result)
+            super().accept()
+        except Exception as e:
+            logger.error(f"Erreur sauvegarde préferences: {e}")
+            QMessageBox.critical(
+                self,
+                translate("preferences.error_title"),
+                f"{translate('preferences.error_save')}: {str(e)}",
+            )
 
     def _connect_signals(self):
         """Connecte les signaux des boutons aux slots."""
