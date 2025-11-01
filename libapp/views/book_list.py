@@ -255,6 +255,16 @@ class BookListView(QWidget):
         # Maintenant la session est fermée, mais les objets sont accessibles
         self.table_model.set_books(books)
         self._on_filter_changed()
+        # Auto-resize des colonnes
+        self.table_view.resizeColumnsToContents()
+
+        # Ajouter un minimum pour lisibilité
+        for col in range(self.table_view.model().columnCount()):
+            width = self.table_view.columnWidth(col)
+            self.table_view.setColumnWidth(col, max(width, 80))
+
+        # Étendre la dernière colonne
+        self.table_view.horizontalHeader().setStretchLastSection(True)
 
     @Slot()
     def _on_filter_changed(self):
