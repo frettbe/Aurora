@@ -65,7 +65,6 @@ class BookDetailsPanel(QWidget):
         placeholder_path = (
             Path(__file__).parent.parent / "resources" / "icons" / "app" / "placeholder-book.svg"
         )
-
         if placeholder_path.exists():
             pixmap = QPixmap(str(placeholder_path))
             if not pixmap.isNull():
@@ -96,7 +95,6 @@ class BookDetailsPanel(QWidget):
             # Retirer le préfixe 'covers/' si présent
             cover_filename = book.cover_image.replace("covers/", "")
             cover_path = user_covers_dir() / cover_filename
-
             if cover_path.exists():
                 pixmap = QPixmap(str(cover_path))
                 scaled = pixmap.scaled(
@@ -107,10 +105,8 @@ class BookDetailsPanel(QWidget):
                 )
                 self.cover_label.setPixmap(scaled)
             else:
-                # 🎯 NOUVEAU : Afficher placeholder au lieu de texte
                 self.cover_label.setPixmap(self._load_placeholder_book())
         else:
-            # 🎯 NOUVEAU : Afficher placeholder au lieu de texte
             self.cover_label.setPixmap(self._load_placeholder_book())
 
         # Afficher les infos

@@ -89,6 +89,8 @@ errors:
   delete_book_body: "Fout bij het verwijderen van het boek"
   delete_member_body: "Fout bij het verwijderen van het lid"
   book_not_selected: "Selecteer een boek."
+  image_processing: "Fout bij beeldverwerking"
+  failed_to_process_image: "Kan afbeelding niet verwerken"
 
 preferences:
   title: "Voorkeuren"
@@ -265,10 +267,11 @@ member:
   is_active_label: "Actief:"
   is_nonactive_status: "Inactief"
   is_active_status: "Actief"
-  status_apprenti: "Leerling"
-  status_compagnon: "Gezel"
-  status_maitre: "Meester"
   is_active: "Het lid is actief"
+  choose_profile: "Kies een foto"
+  remove_profile: "Foto verwijderen"
+  profile_photo: "Profielfoto"
+  select_profile_image: "Selecteer een profielfoto"
 
 member_list:
   search_label: "Zoeken:"

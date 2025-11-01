@@ -88,6 +88,8 @@ errors:
   delete_book_body: "Erreur lors de la suppression du livre"
   delete_member_body: "Erreur lors de la suppression du membre"
   book_not_selected: "Veuillez sélectionner un livre."
+  image_processing: "Erreur de traitement d'image"
+  failed_to_process_image: "Impossible de traiter l'image"
   
 preferences:
   title: "Préférences"
@@ -279,6 +281,10 @@ member:
   is_nonactive_status: "Non actif"
   is_active_status: "Actif"
   is_active: "Le membre est actif"
+  choose_profile: "Choisir une photo"
+  remove_profile: "Supprimer la photo"
+  profile_photo: "Photo de profil"
+  select_profile_image: "Sélectionner une photo de profil"
 
 member_list:
   search_label: "Recherche :" 

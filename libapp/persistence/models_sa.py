@@ -59,7 +59,6 @@ class Author(Base):
 # --- Énumérations pour les statuts et catégories ---
 
 
-
 class LoanStatus(str, enum.Enum):
     """Définit les statuts possibles pour un prêt."""
 
@@ -94,7 +93,7 @@ class Book(Base):
     volume: Mapped[int | None] = mapped_column(Integer)
     code_interne: Mapped[str | None] = mapped_column(String, index=True)
     mots_cles: Mapped[str | None] = mapped_column(String)
-    summary: Mapped[str | None] = mapped_column(Text)  
+    summary: Mapped[str | None] = mapped_column(Text)
     cover_image: Mapped[str | None] = mapped_column(String(500))
 
     # --- Relations ---
@@ -148,6 +147,7 @@ class Member(Base):
     phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
     is_active: Mapped[bool] = mapped_column(Boolean, default=True)
     date_joined: Mapped[date | None] = mapped_column(Date)
+    profile_image: Mapped[str | None] = mapped_column(String(500), nullable=True)
 
     __table_args__ = (Index("ix_members_last_first", "last_name", "first_name"),)
 

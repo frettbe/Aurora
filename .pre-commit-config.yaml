@@ -10,3 +10,13 @@ repos:
     hooks:
       - id: isort
         args: [--profile, black]
+  # Hook local pour générer le Project Map
+  - repo: local
+    hooks:
+      - id: generate-project-map-community
+        name: Generate Aurora-Community Project Map
+        entry: python scripts/generate_map.py
+        language: system
+        always_run: true
+        pass_filenames: false
+        stages: [pre-commit]

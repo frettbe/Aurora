@@ -79,3 +79,14 @@ def user_covers_dir() -> Path:
     covers_dir = user_data_dir() / "covers"
     covers_dir.mkdir(parents=True, exist_ok=True)
     return covers_dir
+
+
+def user_profile_images_dir() -> Path:
+    """Retourne le dossier de stockage des photos de profil des membres.
+
+    Returns:
+        Path: Chemin vers le dossier profile_images/ (créé automatiquement si inexistant)
+    """
+    profile_dir = user_data_dir() / "profile_images"
+    profile_dir.mkdir(parents=True, exist_ok=True)
+    return profile_dir

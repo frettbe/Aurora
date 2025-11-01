@@ -97,9 +97,7 @@ class PreferencesDialog(QDialog):
 
         # Vue au démarrage
         self.startup_view_combo = QComboBox(self)
-        interface_form.addRow(
-            f"{translate('preferences.startup_view')}:", self.startup_view_combo
-        )
+        interface_form.addRow(f"{translate('preferences.startup_view')}:", self.startup_view_combo)
 
         # Mémoriser géométrie
         self.remember_geometry_checkbox = QCheckBox()
@@ -261,9 +259,7 @@ class PreferencesDialog(QDialog):
             members_view_state=getattr(self._initial_prefs, "members_view_state", {}),
             loans_view_state=getattr(self._initial_prefs, "loans_view_state", {}),
             books_visible_columns=visible_cols,
-            members_visible_columns=getattr(
-                self._initial_prefs, "members_visible_columns", []
-            ),
+            members_visible_columns=getattr(self._initial_prefs, "members_visible_columns", []),
             loans_visible_columns=getattr(self._initial_prefs, "loans_visible_columns", []),
             export_include_date=getattr(self._initial_prefs, "export_include_date", True),
             export_include_count=getattr(self._initial_prefs, "export_include_count", True),
@@ -274,9 +270,7 @@ class PreferencesDialog(QDialog):
                 self._initial_prefs, "export_last_custom_message", ""
             ),
             export_last_format=getattr(self._initial_prefs, "export_last_format", "xlsx"),
-            export_last_columns_books=getattr(
-                self._initial_prefs, "export_last_columns_books", []
-            ),
+            export_last_columns_books=getattr(self._initial_prefs, "export_last_columns_books", []),
             export_last_columns_members=getattr(
                 self._initial_prefs, "export_last_columns_members", []
             ),

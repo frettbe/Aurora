@@ -89,6 +89,8 @@ errors:
   delete_book_body: "Fehler beim Löschen des Buchs"
   delete_member_body: "Fehler beim Löschen des Mitglieds"
   book_not_selected: "Bitte wählen Sie ein Buch aus."
+  image_processing: "Fehler bei der Bildverarbeitung"
+  failed_to_process_image: "Bild konnte nicht verarbeitet werden"
 
 preferences:
   title: "Einstellungen"
@@ -274,10 +276,11 @@ member:
   is_active_label: "Aktiv:"
   is_nonactive_status: "Inaktiv"
   is_active_status: "Aktiv"
-  status_apprenti: "Lehrling"
-  status_compagnon: "Geselle"
-  status_maitre: "Meister"
   is_active: "Das Mitglied ist aktiv"
+  choose_profile: "Foto auswählen"
+  remove_profile: "Foto entfernen"
+  profile_photo: "Profilfoto"
+  select_profile_image: "Profilfoto auswählen"
 
 member_list:
   search_label: "Suche:"

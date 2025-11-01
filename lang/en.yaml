@@ -87,6 +87,8 @@ errors:
   delete_book_body: "Error deleting the book"
   delete_member_body: "Error deleting the member"
   book_not_selected: "Please select a book."
+  image_processing: "Image processing error"
+  failed_to_process_image: "Failed to process image"
 
 preferences:
   title: "Preferences"
@@ -263,10 +265,11 @@ member:
   is_active_label: "Active:"
   is_nonactive_status: "Inactive"
   is_active_status: "Active"
-  status_apprenti: "Apprentice"
-  status_compagnon: "Journeyman"
-  status_maitre: "Master"
   is_active: "The member is active"
+  choose_profile: "Choose a photo"
+  remove_profile: "Remove photo"
+  profile_photo: "Profile photo"
+  select_profile_image: "Select a profile photo"
 
 member_list:
   search_label: "Search:"

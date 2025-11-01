@@ -6,6 +6,8 @@ le nom, l'email, le téléphone et autres détails d'un membre sélectionné.
 
 from __future__ import annotations
 
+from pathlib import Path
+
 from PySide6.QtCore import Qt
 from PySide6.QtGui import QPixmap
 from PySide6.QtWidgets import QLabel, QScrollArea, QVBoxLayout, QWidget
@@ -98,6 +100,19 @@ class MemberDetailsPanel(QWidget):
             if member.is_active
             else translate("member_details.inactive")
         )
+
+        if member.profile_image and Path(member.profile_image).exists():
+            pixmap = QPixmap(member.profile_image)
+            scaled_pixmap = pixmap.scaled(
+                256,
+                256,
+                Qt.AspectRatioMode.KeepAspectRatio,
+                Qt.TransformationMode.SmoothTransformation,
+            )
+            self.photo_label.setPixmap(scaled_pixmap)
+        else:
+            # Charger le placeholder avatar
+            self._load_placeholder_member()
 
         info_text = f"""
         <h2>{member.first_name} {member.last_name}</h2>

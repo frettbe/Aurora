@@ -48,7 +48,7 @@ class Preferences:
             "fund",
             "available",
             "summary",
-            "cover_image",                          
+            "cover_image",
         ]
     )
     members_visible_columns: list[str] = field(
