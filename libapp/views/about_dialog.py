@@ -18,8 +18,8 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from ..__version__ import __app_name__, __license__, __version__
 from ..services.translation_service import translate
+from .__version__ import __app_name__, __license__, __version__
 
 
 class AboutDialog(QDialog):

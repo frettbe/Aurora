@@ -23,7 +23,7 @@ from PySide6.QtWidgets import (
     QToolBar,
 )
 
-from ..._version import __version__
+from ._version import __version__
 from .persistence.database import ensure_tables, get_session
 from .persistence.models_sa import Book, Member
 from .services.enhanced_logging_config import setup_app_logging
